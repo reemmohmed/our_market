@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:our_market/core/widgets/app_colors.dart';
+import 'package:our_market/core/widgets/titel_text_widget.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   const CustomElevatedButton({
@@ -81,5 +82,26 @@ class CustomElevatedIcon extends StatelessWidget {
             ),
           )),
     );
+  }
+}
+
+class CustomElevateGenaric extends StatelessWidget {
+  const CustomElevateGenaric({
+    super.key,
+    required this.text,
+    this.onPressed,
+  });
+  final String text;
+  final void Function()? onPressed;
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.kprimaryColoblue),
+        onPressed: onPressed,
+        child: TitelTextWidget(
+          text: text,
+          color: Colors.white,
+        ));
   }
 }
