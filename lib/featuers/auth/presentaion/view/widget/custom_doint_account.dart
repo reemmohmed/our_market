@@ -6,21 +6,25 @@ import 'package:our_market/core/widgets/titel_text_widget.dart';
 class CustonDontAccount extends StatelessWidget {
   const CustonDontAccount({
     super.key,
+    required this.text,
+    required this.subtitel,
+    this.onpressed,
   });
-
+  final String text, subtitel;
+  final void Function()? onpressed;
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        const SubtitelTextWidget(
-          text: "Don't have an account ?",
+        SubtitelTextWidget(
+          text: text,
           fontWeight: FontWeight.bold,
         ),
         GestureDetector(
-            onTap: () {},
-            child: const TitelTextWidget(
-              text: " Sign Up",
+            onTap: onpressed,
+            child: TitelTextWidget(
+              text: subtitel,
               color: AppColors.ksignUp,
             ))
       ],

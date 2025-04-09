@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:our_market/core/function/navigator_push.dart';
 import 'package:our_market/core/widgets/app_colors.dart';
+import 'package:our_market/featuers/auth/presentaion/view/singup_view.dart';
 import 'package:our_market/featuers/auth/presentaion/view/widget/custom_doint_account.dart';
 import 'package:our_market/featuers/auth/presentaion/view/widget/custom_elevated_button.dart';
 import 'package:our_market/featuers/auth/presentaion/view/widget/custom_forget_password.dart';
 import 'package:our_market/featuers/auth/presentaion/view/widget/custom_tet_form.dart';
+import 'package:our_market/featuers/nave_bar/presentation/view/main_navebar.dart';
 
 class CustomlogenCard extends StatelessWidget {
   const CustomlogenCard({
@@ -56,7 +59,12 @@ class CustomlogenCard extends StatelessWidget {
               height: 17,
             ),
             CustomElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                navigatorpush(
+                  context,
+                  const MainNavebar(),
+                );
+              },
               text: "Login",
             ),
             const SizedBox(
@@ -71,7 +79,13 @@ class CustomlogenCard extends StatelessWidget {
             const SizedBox(
               height: 17,
             ),
-            const CustonDontAccount()
+            CustonDontAccount(
+              onpressed: () {
+                navigatorpush(context, const SingupView());
+              },
+              text: "Don't have an Account ?",
+              subtitel: "Sign Up",
+            )
           ],
         ),
       ),

@@ -7,24 +7,33 @@ class LogenViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-      child: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TitelTextWidget(text: "Hi👋👋"),
-              TitelTextWidget(
-                text: "wellcom To Our Market",
-                fontSize: 25,
-              ),
-              CustomlogenCard(),
-            ],
+    final screenHeight = MediaQuery.of(context).size.height;
+    return SafeArea(
+        child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minHeight: screenHeight - MediaQuery.of(context).padding.vertical,
+          ),
+          child: const IntrinsicHeight(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // const SizedBox(
+                //   height: 100,
+                // ),
+                TitelTextWidget(text: "Hi👋👋"),
+                TitelTextWidget(
+                  text: "wellcom To Our Market",
+                  fontSize: 25,
+                ),
+                CustomlogenCard(),
+              ],
+            ),
           ),
         ),
       ),
-    );
+    ));
   }
 }
