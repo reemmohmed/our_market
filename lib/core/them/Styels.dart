@@ -2,16 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:our_market/core/widgets/app_colors.dart';
 
 class Styels {
-  static var styel18;
-
-  static var styel25;
-
-  static var styel22;
-
-  static var styel24;
-
-  static var styel12038;
-
   static ThemeData themeData(
       {required bool isDarkTheem, required BuildContext context}) {
     return ThemeData(
