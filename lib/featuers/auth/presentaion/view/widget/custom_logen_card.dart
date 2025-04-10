@@ -7,7 +7,7 @@ import 'package:our_market/featuers/auth/presentaion/view/widget/custom_doint_ac
 import 'package:our_market/featuers/auth/presentaion/view/widget/custom_elevated_button.dart';
 import 'package:our_market/featuers/auth/presentaion/view/widget/custom_forget_password.dart';
 import 'package:our_market/featuers/auth/presentaion/view/widget/custom_tet_form.dart';
-import 'package:our_market/featuers/nave_bar/presentation/view/main_navebar.dart';
+import 'package:our_market/featuers/nave_bar/presentation/view/navebar.dart';
 
 class CustomlogenCard extends StatelessWidget {
   const CustomlogenCard({
@@ -62,7 +62,7 @@ class CustomlogenCard extends StatelessWidget {
               onPressed: () {
                 navigatorpush(
                   context,
-                  const MainNavebar(),
+                  const NaveBar(),
                 );
               },
               text: "Login",
