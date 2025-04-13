@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:our_market/core/widgets/app_colors.dart';
 
 class CustomTextSeach extends StatelessWidget {
   const CustomTextSeach({
@@ -10,8 +9,12 @@ class CustomTextSeach extends StatelessWidget {
   final String? hitText;
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      autofocus: true,
+    return TextField(
+      showCursor: FocusScope.of(context).hasFocus,
+      cursorColor: Colors.blue, // حدد لون واضح
+      cursorWidth: 2.0, // عرض المؤشر
+      cursorHeight: 25.0, // ارتفاع المؤشر
+
       decoration: InputDecoration(
         prefix: GestureDetector(
           onTap: () {
@@ -23,12 +26,6 @@ class CustomTextSeach extends StatelessWidget {
           ),
         ),
         hintText: "$hitText",
-        hintStyle: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-            color: AppColors.darkScaffold),
-        filled: true,
-        fillColor: Colors.grey,
       ),
     );
   }

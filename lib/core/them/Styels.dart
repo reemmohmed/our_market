@@ -22,9 +22,16 @@ class Styels {
             TextStyle(color: isDarkTheem ? Colors.white : Colors.black),
         color: isDarkTheem ? AppColors.darkScaffold : AppColors.lightScaffold,
       ),
+
       inputDecorationTheme: InputDecorationTheme(
         contentPadding: const EdgeInsets.all(10),
         filled: true,
+        hintStyle: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+          color: isDarkTheem ? Colors.white70 : AppColors.darkScaffold,
+        ),
+        fillColor: isDarkTheem ? Colors.grey[800] : Colors.grey[200],
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.transparent),
           borderRadius: BorderRadius.circular(8),
