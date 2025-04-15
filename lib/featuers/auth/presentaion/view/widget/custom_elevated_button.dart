@@ -105,3 +105,26 @@ class CustomElevateGenaric extends StatelessWidget {
         ));
   }
 }
+
+class CustomIconButton extends StatelessWidget {
+  const CustomIconButton({
+    super.key,
+    required this.icon,
+    this.onPressed,
+    this.size = 28,
+  });
+  final IconData icon;
+  final void Function()? onPressed;
+  final double? size;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+        onPressed: onPressed,
+        icon: Icon(
+          icon,
+          color: Theme.of(context).iconTheme.color,
+          size: size,
+        ));
+  }
+}

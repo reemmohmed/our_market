@@ -5,18 +5,18 @@ import 'package:ionicons/ionicons.dart';
 import 'package:our_market/core/widgets/app_colors.dart';
 import 'package:our_market/featuers/favourite/presentaion/view/favorites_view.dart';
 import 'package:our_market/featuers/home/presentaion/home_view.dart';
+import 'package:our_market/featuers/my_cart/presentaions/views/my_cart_view.dart';
 import 'package:our_market/featuers/nave_bar/manger/cubit/nave_bar_cubit_cubit.dart';
 import 'package:our_market/featuers/profile/presentation/view/profile_view.dart';
-import 'package:our_market/featuers/search/presentation/view/search_view.dart';
 import 'package:our_market/featuers/store/presentation/view/store_view.dart';
 
 class NaveBar extends StatelessWidget {
   const NaveBar({super.key});
   final List<Widget> pageView = const [
     HomeView(),
-    SearchView(),
     StoreView(),
     FavoutitsView(),
+    MyCartView(),
     ProfileView(),
   ];
   @override
@@ -43,8 +43,8 @@ class NaveBar extends StatelessWidget {
                     onTabChange: (index) {
                       cubit.changcurrentPage(index);
                     },
-                    rippleColor: AppColors
-                        .kprimaryColor, // tab button ripple color when pressed
+                    rippleColor:
+                        AppColors.kgrey, // tab button ripple color when pressed
                     // hoverColor: Colors.grey[700]!, // tab button hover color
                     haptic: true, // haptic feedback
                     // tabBorderRadius: 12,
@@ -69,16 +69,16 @@ class NaveBar extends StatelessWidget {
                         text: 'Home',
                       ),
                       GButton(
-                        icon: Ionicons.search,
-                        text: 'Search',
-                      ),
-                      GButton(
-                        icon: Ionicons.storefront,
+                        icon: Icons.store,
                         text: 'Store',
                       ),
                       GButton(
                         icon: Ionicons.heart,
                         text: 'Favorite',
+                      ),
+                      GButton(
+                        icon: Ionicons.cart,
+                        text: 'cart',
                       ),
                       GButton(
                         icon: Ionicons.person,

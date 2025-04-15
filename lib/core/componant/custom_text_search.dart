@@ -16,17 +16,17 @@ class CustomTextSeach extends StatelessWidget {
       cursorHeight: 25.0, // ارتفاع المؤشر
 
       decoration: InputDecoration(
-        prefix: GestureDetector(
-          onTap: () {
-            FocusScope.of(context).unfocus();
-          },
-          child: const Icon(
-            Ionicons.search,
-            size: 25,
+          prefix: GestureDetector(
+            onTap: () {
+              FocusScope.of(context).unfocus();
+            },
+            child: const Icon(
+              Ionicons.search,
+              size: 25,
+            ),
           ),
-        ),
-        hintText: "$hitText",
-      ),
+          hintText: "$hitText",
+          hintStyle: const TextStyle(color: Colors.grey, fontSize: 20)),
     );
   }
 }

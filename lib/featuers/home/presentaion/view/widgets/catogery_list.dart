@@ -22,13 +22,16 @@ class CatogetyList extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return SizedBox(
-      height: size.height * 0.15,
+      height: size.width * 0.25,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: catogers.length,
           itemBuilder: (context, index) {
-            return CatogeryItem(
-              catogery: catogers[index],
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CatogeryItem(
+                catogery: catogers[index],
+              ),
             );
           }),
     );

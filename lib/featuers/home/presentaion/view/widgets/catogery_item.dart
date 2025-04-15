@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:our_market/core/widgets/subtitel_text_widget.dart';
 import 'package:our_market/featuers/home/presentaion/view/widgets/catogery_list.dart';
 
 class CatogeryItem extends StatelessWidget {
@@ -11,22 +12,27 @@ class CatogeryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SizedBox(
-        height: size.height * 0.15,
-        child: Column(
-          children: [
-            CircleAvatar(
-              maxRadius: 33,
-              child: Icon(
-                catogery.icon,
-                size: 55,
-              ),
+    final avatarRadius = size.width * 0.08;
+    final iconSize = size.width * 0.07;
+    return SizedBox(
+      width: size.width * 0.25,
+      child: Column(
+        children: [
+          CircleAvatar(
+            maxRadius: avatarRadius,
+            child: Icon(
+              catogery.icon,
+              size: iconSize,
             ),
-            Text(catogery.text)
-          ],
-        ),
+          ),
+          SubtitelTextWidget(
+            maxLines: 1,
+            text: catogery.text,
+            textAlign: TextAlign.center,
+            fontSize: size.width * 0.035,
+            overflow: TextOverflow.ellipsis,
+          )
+        ],
       ),
     );
   }

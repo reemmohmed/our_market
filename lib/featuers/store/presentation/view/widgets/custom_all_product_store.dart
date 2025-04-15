@@ -5,10 +5,8 @@ import 'package:our_market/core/widgets/app_colors.dart';
 import 'package:our_market/core/widgets/subtitel_text_widget.dart';
 import 'package:our_market/core/widgets/titel_text_widget.dart';
 
-class AllProduct extends StatelessWidget {
-  const AllProduct({
-    super.key,
-  });
+class CustomAllProductStore extends StatelessWidget {
+  const CustomAllProductStore({super.key});
 
   @override
   Widget build(BuildContext context) {
