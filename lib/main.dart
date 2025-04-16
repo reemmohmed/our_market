@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:our_market/core/them/Styels.dart';
 import 'package:our_market/core/them/cubit/them_cubit_cubit.dart';
 import 'package:our_market/featuers/nave_bar/presentation/view/navebar.dart';
+import 'package:our_market/test/runtest.dart';
 
 void main() {
   runApp(const OurMarket());
@@ -33,7 +34,9 @@ class OurMarket extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'OurMarket',
             theme: Styels.themeData(isDarkTheem: isDark, context: context),
+
             home: const NaveBar(),
+            //  home: Runtest(),
           );
         },
       ),
