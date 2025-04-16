@@ -60,7 +60,7 @@ class CustomlogenCard extends StatelessWidget {
             ),
             CustomElevatedButton(
               onPressed: () {
-                navigatorpush(
+                navigatorTo(
                   context,
                   const NaveBar(),
                 );
@@ -81,7 +81,7 @@ class CustomlogenCard extends StatelessWidget {
             ),
             CustonDontAccount(
               onpressed: () {
-                navigatorpush(context, const SingupView());
+                navigatorTo(context, const SingupView());
               },
               text: "Don't have an Account ?",
               subtitel: "Sign Up",

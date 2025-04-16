@@ -15,7 +15,7 @@ class CustomForgetPassword extends StatelessWidget {
       alignment: Alignment.centerRight,
       child: GestureDetector(
         onTap: () {
-          navigatorpush(context, const ForgetPasswordView());
+          navigatorTo(context, const ForgetPasswordView());
         },
         child: const TitelTextWidget(
           text: "Forget password?",
