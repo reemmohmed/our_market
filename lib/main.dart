@@ -16,9 +16,6 @@ void main() async {
   await Supabase.initialize(
     url: dotenv.env['SUPABASE_URL']!,
     anonKey: dotenv.env['SUPABASE_KEY']!,
-    // url: 'https://kvvuxlijqefligxahoxj.supabase.co',
-    // anonKey:
-    //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt2dnV4bGlqcWVmbGlneGFob3hqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ4ODk3NTMsImV4cCI6MjA2MDQ2NTc1M30.XvBHJyXY3McBAgG7lEUe5LCtHd0v9ZVynbCOwdKvGek',
   );
 
   runApp(const OurMarket());
@@ -54,6 +51,7 @@ class OurMarket extends StatelessWidget {
             title: 'OurMarket',
             theme: Styels.themeData(isDarkTheem: isDark, context: context),
             // check user is empepty go to NaveBar also  go to logein
+
             home: clint.auth.currentUser != null
                 ? const NaveBar()
                 : const LogenView(),

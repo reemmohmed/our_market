@@ -18,6 +18,7 @@ class SingupViewBody extends StatefulWidget {
 }
 
 class _SingupViewBodyState extends State<SingupViewBody> {
+  bool obscureText = true;
   final GlobalKey<FormState> key = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -101,15 +102,21 @@ class _SingupViewBodyState extends State<SingupViewBody> {
                                   ),
                                   CustomTextForm(
                                     obscuringCharacter: "*",
-                                    obscureText: true,
+                                    obscureText: obscureText,
                                     // validator: (vailu) {},
                                     lableText: "Password",
                                     keyboardType: TextInputType.streetAddress,
                                     controller: passwordController,
                                     suffixIcon: IconButton(
-                                      onPressed: () {},
-                                      icon: const Icon(
-                                        Icons.visibility_off_sharp,
+                                      onPressed: () {
+                                        setState(() {
+                                          obscureText = !obscureText;
+                                        });
+                                      },
+                                      icon: Icon(
+                                        obscureText
+                                            ? Icons.visibility_off_sharp
+                                            : Icons.visibility,
                                         size: 25,
                                       ),
                                     ),

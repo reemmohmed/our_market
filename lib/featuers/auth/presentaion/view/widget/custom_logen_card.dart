@@ -24,6 +24,7 @@ class CustomlogenCard extends StatefulWidget {
 }
 
 class _CustomlogenCardState extends State<CustomlogenCard> {
+  bool obscureText = true;
   bool isLoading = false;
   final GlobalKey<FormState> key = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
@@ -107,14 +108,20 @@ class _CustomlogenCardState extends State<CustomlogenCard> {
                           // focusNode: passwordfocuseNode,
                           controller: passwordController,
                           obscuringCharacter: "*",
-                          obscureText: true,
+                          obscureText: obscureText,
                           // validator: (vailu) {},
                           lableText: "Password",
                           keyboardType: TextInputType.streetAddress,
                           suffixIcon: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.visibility_off_sharp,
+                            onPressed: () {
+                              setState(() {
+                                obscureText = !obscureText;
+                              });
+                            },
+                            icon: Icon(
+                              obscureText
+                                  ? Icons.visibility_off_sharp
+                                  : Icons.visibility,
                               size: 25,
                             ),
                           ),
