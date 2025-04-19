@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:our_market/core/them/Styels.dart';
 import 'package:our_market/core/them/cubit/them_cubit_cubit.dart';
+import 'package:our_market/featuers/auth/presentaion/manger/cubit/authentication_cubit.dart';
+import 'package:our_market/featuers/auth/presentaion/view/logen_view.dart';
 import 'package:our_market/featuers/nave_bar/presentation/view/navebar.dart';
 import 'package:our_market/test/runtest.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load();
+
+  await Supabase.initialize(
+    url: dotenv.env['SUPABASE_URL']!,
+    anonKey: dotenv.env['SUPABASE_KEY']!,
+    // url: 'https://kvvuxlijqefligxahoxj.supabase.co',
+    // anonKey:
+    //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt2dnV4bGlqcWVmbGlneGFob3hqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ4ODk3NTMsImV4cCI6MjA2MDQ2NTc1M30.XvBHJyXY3McBAgG7lEUe5LCtHd0v9ZVynbCOwdKvGek',
+  );
+
   runApp(const OurMarket());
 }
 
@@ -14,13 +29,17 @@ class OurMarket extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SupabaseClient clint = Supabase.instance.client;
     return MultiBlocProvider(
       providers: [
         BlocProvider(
           create: (context) {
             return ThemCubit()..getThem();
           },
-        )
+        ),
+        BlocProvider(
+          create: (context) => AuthenticationCubit(),
+        ),
       ],
       child: BlocBuilder<ThemCubit, ThemCubitState>(
         builder: (context, state) {
@@ -34,8 +53,11 @@ class OurMarket extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'OurMarket',
             theme: Styels.themeData(isDarkTheem: isDark, context: context),
+            // check user is empepty go to NaveBar also  go to logein
+            home: clint.auth.currentUser != null
+                ? const NaveBar()
+                : const LogenView(),
 
-            home: const NaveBar(),
             //  home: Runtest(),
           );
         },

@@ -55,7 +55,7 @@ class CustomCardItem extends StatelessWidget {
                     CustomElevateGenaric(
                       onPressed: () {},
                       text: "BuyNow",
-                    )
+                    ),
                   ],
                 ),
               )

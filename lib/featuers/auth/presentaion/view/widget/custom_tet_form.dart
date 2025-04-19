@@ -2,25 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:our_market/core/widgets/app_colors.dart';
 
 class CustomTextForm extends StatelessWidget {
-  const CustomTextForm({
-    super.key,
-    this.lableText,
-    this.validator,
-    this.keyboardType,
-    this.obscureText = false,
-    this.suffixIcon,
-    this.obscuringCharacter = ".",
-  });
+  const CustomTextForm(
+      {super.key,
+      this.lableText,
+      this.validator,
+      this.keyboardType,
+      this.obscureText = false,
+      this.suffixIcon,
+      this.obscuringCharacter = ".",
+      this.controller,
+      this.focusNode});
   final String? lableText;
   final String obscuringCharacter;
   final bool obscureText;
   final TextInputType? keyboardType;
   final Widget? suffixIcon;
   final String? Function(String?)? validator;
+  final TextEditingController? controller;
+  final FocusNode? focusNode;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      focusNode: focusNode,
+      controller: controller,
       obscuringCharacter: obscuringCharacter,
       obscureText: obscureText,
       validator: (valu) {

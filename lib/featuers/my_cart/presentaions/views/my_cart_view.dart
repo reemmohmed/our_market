@@ -12,6 +12,7 @@ class MyCartView extends StatelessWidget {
       child: Scaffold(
         bottomSheet: const CustomButtonCheet(),
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           centerTitle: true,
           title: const TitelTextWidget(text: "Your Bag"),
         ),
