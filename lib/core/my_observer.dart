@@ -5,7 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class MyObserver implements BlocObserver {
   @override
   void onChange(BlocBase bloc, Change change) {
-    log(bloc.toString());
+    log('[Bloc Change] ${bloc.runtimeType}');
+    log('Previous state: ${change.currentState}');
+    log('New state: ${change.nextState}');
   }
 
   @override

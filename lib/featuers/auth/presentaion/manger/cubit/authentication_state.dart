@@ -28,3 +28,12 @@ final class GoogelSinghtInLoading extends AuthenticationState {}
 final class GoogelSinghtInSucsess extends AuthenticationState {}
 
 final class GoogelSinghtInFailuer extends AuthenticationState {}
+
+final class SignOutLoading extends AuthenticationState {}
+
+final class SignOutSucsess extends AuthenticationState {}
+
+final class SignOutFailuer extends AuthenticationState {
+  // final String error;
+  // logOutFailuer({required this.error});
+}
