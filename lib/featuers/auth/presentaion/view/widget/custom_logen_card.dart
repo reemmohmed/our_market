@@ -73,6 +73,12 @@ class _CustomlogenCardState extends State<CustomlogenCard> {
         if (state is LoginFailure) {
           showMassegeScaffold(context, state.error);
         }
+        if (state is SinghUpSuccess || state is GoogelSinghtInSucsess) {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) {
+            return const NaveBar();
+          }));
+        }
       },
       builder: (context, state) {
         AuthenticationCubit authcubit = context.read<AuthenticationCubit>();
@@ -156,7 +162,9 @@ class _CustomlogenCardState extends State<CustomlogenCard> {
                         CustomElevatedIcon(
                           text: "Google",
                           backgroundColor: Colors.red,
-                          onPressed: () {},
+                          onPressed: () {
+                            authcubit.googleSignIn();
+                          },
                           icon: Ionicons.logo_google,
                         ),
                         const SizedBox(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:our_market/core/my_observer.dart';
 import 'package:our_market/core/them/Styels.dart';
 import 'package:our_market/core/them/cubit/them_cubit_cubit.dart';
 import 'package:our_market/featuers/auth/presentaion/manger/cubit/authentication_cubit.dart';
@@ -18,6 +19,7 @@ void main() async {
     anonKey: dotenv.env['SUPABASE_KEY']!,
   );
 
+  Bloc.observer = MyObserver();
   runApp(const OurMarket());
 }
 

@@ -40,10 +40,10 @@ class _SingupViewBodyState extends State<SingupViewBody> {
         if (state is SinghUpFailure) {
           showMassegeScaffold(context, state.error);
         }
-        if (state is SinghUpSuccess) {
+        if (state is SinghUpSuccess || state is GoogelSinghtInSucsess) {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) {
-            return NaveBar();
+            return const NaveBar();
           }));
         }
       },
@@ -142,7 +142,9 @@ class _SingupViewBodyState extends State<SingupViewBody> {
                                   CustomElevatedIcon(
                                     text: "Google",
                                     backgroundColor: Colors.red,
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      regestercubit.googleSignIn();
+                                    },
                                     icon: Ionicons.logo_google,
                                   ),
                                   const SizedBox(

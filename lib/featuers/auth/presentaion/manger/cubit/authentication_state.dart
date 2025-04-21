@@ -22,3 +22,9 @@ final class SinghUpFailure extends AuthenticationState {
   final String error;
   SinghUpFailure({required this.error});
 }
+
+final class GoogelSinghtInLoading extends AuthenticationState {}
+
+final class GoogelSinghtInSucsess extends AuthenticationState {}
+
+final class GoogelSinghtInFailuer extends AuthenticationState {}
