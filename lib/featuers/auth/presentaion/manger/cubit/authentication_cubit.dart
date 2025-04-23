@@ -76,6 +76,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       idToken: idToken,
       accessToken: accessToken,
     );
+    await addUserIdToDatabase(
+        name: googleUser!.displayName!, email: googleUser!.email);
     emit(GoogelSinghtInSucsess());
     return response;
   }
@@ -103,11 +105,13 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     }
   }
 
+// inset => only add data
+// upsert => add or update data
   Future<void> addUserIdToDatabase(
       {required String name, required String email}) async {
     emit(AddUserIdToDataBseLoading());
     try {
-      await clint.from('users').insert({
+      await clint.from('users').upsert({
         "user_id": clint.auth.currentUser!.id,
         'name': name,
         'email': email
