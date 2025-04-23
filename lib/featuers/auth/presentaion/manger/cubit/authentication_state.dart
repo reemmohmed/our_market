@@ -53,3 +53,9 @@ final class AddUserIdToDataBseLoading extends AuthenticationState {}
 final class AddUserIdToDataBseSucsess extends AuthenticationState {}
 
 final class AddUserIdToDataBseFailuer extends AuthenticationState {}
+
+final class GetUserDataLoading extends AuthenticationState {}
+
+final class GetUserDataSucsess extends AuthenticationState {}
+
+final class GetUserDataFailuer extends AuthenticationState {}

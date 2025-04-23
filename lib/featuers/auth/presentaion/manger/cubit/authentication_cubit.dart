@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:meta/meta.dart';
+import 'package:our_market/featuers/auth/presentaion/data/user_data_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 part 'authentication_state.dart';
@@ -17,6 +18,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         email: email,
         password: password,
       );
+      await getUserData();
       emit(LoginSuccess());
     } on AuthApiException catch (e) {
       log(e.toString());
@@ -38,6 +40,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         email: email,
       );
       await addUserIdToDatabase(name: name, email: email);
+      await getUserData();
       emit(SinghUpSuccess());
     } on AuthApiException catch (e) {
       log(e.toString());
@@ -78,6 +81,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     );
     await addUserIdToDatabase(
         name: googleUser!.displayName!, email: googleUser!.email);
+    await getUserData();
     emit(GoogelSinghtInSucsess());
     return response;
   }
@@ -98,7 +102,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     try {
       await clint.auth.resetPasswordForEmail(email);
     } catch (e) {
-      log(e.toString());
+      (e.toString());
       emit(ResetpasswordFailuer(
         error: e.toString(),
       ));
@@ -120,6 +124,25 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     } catch (e) {
       log(e.toString());
       emit(AddUserIdToDataBseFailuer());
+    }
+  }
+
+  UserDataModel? userData;
+  Future<void> getUserData() async {
+    emit(GetUserDataLoading());
+    try {
+      final data = await clint
+          .from('users')
+          .select()
+          .eq("user_id", clint.auth.currentUser!.id);
+      userData = UserDataModel(
+          userId: data[0]["user_id"],
+          name: data[0]["name"],
+          email: data[0]["email"]);
+      log(data.toString());
+      emit(GetUserDataSucsess());
+    } catch (e) {
+      log(e.toString());
     }
   }
 }

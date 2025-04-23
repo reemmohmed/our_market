@@ -5,6 +5,7 @@ import 'package:our_market/core/function/navigator_push.dart';
 import 'package:our_market/core/function/navigator_to_out.dart';
 import 'package:our_market/core/widgets/circle_loading.dart';
 import 'package:our_market/core/widgets/titel_text_widget.dart';
+import 'package:our_market/featuers/auth/presentaion/data/user_data_model.dart';
 import 'package:our_market/featuers/auth/presentaion/manger/cubit/authentication_cubit.dart';
 import 'package:our_market/featuers/auth/presentaion/view/logen_view.dart';
 import 'package:our_market/featuers/my_cart/presentaions/views/my_cart_view.dart';
@@ -17,6 +18,7 @@ class ProfileViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserDataModel? user = context.read<AuthenticationCubit>().userData;
     return BlocConsumer<AuthenticationCubit, AuthenticationState>(
       listener: (context, state) {
         if (state is SignOutSucsess) {
@@ -37,8 +39,9 @@ class ProfileViewBody extends StatelessWidget {
                           radius: 55,
                           child: Text("R"),
                         ),
-                        const TitelTextWidget(text: "reemMohamed"),
-                        const TitelTextWidget(text: "reemMohamed@gmail.com"),
+                        TitelTextWidget(text: user?.name ?? "reemMohamed"),
+                        TitelTextWidget(
+                            text: user?.email ?? "reemMohamed@gmail.com"),
                         const SizedBox(
                           height: 7,
                         ),
