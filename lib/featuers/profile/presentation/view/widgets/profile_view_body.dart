@@ -73,8 +73,8 @@ class ProfileViewBody extends StatelessWidget {
                         CustomListTitel(
                           text: "LogOut",
                           icon: Ionicons.log_out,
-                          onTap: () {
-                            authCubit.signOut();
+                          onTap: () async {
+                            await authCubit.signOut();
                           },
                         ),
                       ],

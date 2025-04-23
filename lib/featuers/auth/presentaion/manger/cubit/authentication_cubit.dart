@@ -89,4 +89,16 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       emit(SignOutFailuer());
     }
   }
+
+  Future<void> resetpassword({required String email}) async {
+    emit(ResetpasswordLoging());
+    try {
+      await clint.auth.resetPasswordForEmail(email);
+    } catch (e) {
+      log(e.toString());
+      emit(ResetpasswordFailuer(
+        error: e.toString(),
+      ));
+    }
+  }
 }

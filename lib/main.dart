@@ -54,9 +54,10 @@ class OurMarket extends StatelessWidget {
             theme: Styels.themeData(isDarkTheem: isDark, context: context),
             // check user is empepty go to NaveBar also  go to logein
 
-            home: clint.auth.currentUser != null
-                ? const NaveBar()
-                : const LogenView(),
+            home: LogenView(),
+            // home: clint.auth.currentUser != null
+            //     ? const NaveBar()
+            //     : const LogenView(),
 
             //  home: Runtest(),
           );

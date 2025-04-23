@@ -37,3 +37,13 @@ final class SignOutFailuer extends AuthenticationState {
   // final String error;
   // logOutFailuer({required this.error});
 }
+
+final class ResetpasswordLoging extends AuthenticationState {}
+
+final class ResetpasswordSucsess extends AuthenticationState {}
+
+final class ResetpasswordFailuer extends AuthenticationState {
+  final String error;
+
+  ResetpasswordFailuer({required this.error});
+}
