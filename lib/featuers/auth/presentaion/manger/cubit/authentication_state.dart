@@ -47,3 +47,9 @@ final class ResetpasswordFailuer extends AuthenticationState {
 
   ResetpasswordFailuer({required this.error});
 }
+
+final class AddUserIdToDataBseLoading extends AuthenticationState {}
+
+final class AddUserIdToDataBseSucsess extends AuthenticationState {}
+
+final class AddUserIdToDataBseFailuer extends AuthenticationState {}

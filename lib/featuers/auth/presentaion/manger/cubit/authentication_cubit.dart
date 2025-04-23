@@ -37,6 +37,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         password: password,
         email: email,
       );
+      await addUserIdToDatabase(name: name, email: email);
       emit(SinghUpSuccess());
     } on AuthApiException catch (e) {
       log(e.toString());
@@ -99,6 +100,22 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       emit(ResetpasswordFailuer(
         error: e.toString(),
       ));
+    }
+  }
+
+  Future<void> addUserIdToDatabase(
+      {required String name, required String email}) async {
+    emit(AddUserIdToDataBseLoading());
+    try {
+      await clint.from('users').insert({
+        "user_id": clint.auth.currentUser!.id,
+        'name': name,
+        'email': email
+      });
+      emit(AddUserIdToDataBseSucsess());
+    } catch (e) {
+      log(e.toString());
+      emit(AddUserIdToDataBseFailuer());
     }
   }
 }
