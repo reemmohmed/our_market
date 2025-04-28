@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:our_market/core/function/navigator_push.dart';
 import 'package:our_market/core/widgets/subtitel_text_widget.dart';
 import 'package:our_market/core/widgets/titel_text_widget.dart';
 import 'package:our_market/featuers/auth/presentaion/view/widget/custom_elevated_button.dart';
 import 'package:our_market/featuers/auth/presentaion/view/widget/custom_tet_form.dart';
-import 'package:our_market/featuers/my_cart/presentaions/views/my_cart_view.dart';
 import 'package:our_market/featuers/product_detalse/mange/DotesImage/dotes_image_cubit.dart';
 import 'package:our_market/featuers/product_detalse/presentation/view/widgets/componantsview/custom_buttom_buy.dart';
 import 'package:our_market/featuers/product_detalse/presentation/view/widgets/componantsview/custom_detals_price.dart';
 import 'package:our_market/featuers/product_detalse/presentation/view/widgets/componantsview/custom_list_comment.dart';
 import 'package:our_market/featuers/product_detalse/presentation/view/widgets/componantsview/custom_name_and_favourit.dart';
+import 'package:our_market/featuers/product_detalse/presentation/view/widgets/componantsview/custom_total_rating.dart';
 
 import 'package:our_market/featuers/product_detalse/presentation/view/widgets/product_dots_indecator.dart';
 import 'package:our_market/featuers/product_detalse/presentation/view/widgets/product_image_saroursel.dart';
@@ -43,6 +42,7 @@ class ProductDetailBody extends StatelessWidget {
               const SizedBox(
                 height: 9,
               ),
+              const CustomTotalrating(),
               const CustomDetalsPrice(),
               const CustmnameandFavourit(),
               const SubtitelTextWidget(

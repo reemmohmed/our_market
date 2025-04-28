@@ -31,6 +31,8 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+lib/core/AppServer/key_api_sabapase.dart
+
 
 # Symbolication related
 app.*.symbols

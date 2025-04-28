@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:our_market/core/widgets/subtitel_text_widget.dart';
 import 'package:our_market/core/widgets/titel_text_widget.dart';
 import 'package:our_market/featuers/auth/presentaion/view/widget/custom_elevated_button.dart';
 
@@ -16,7 +17,7 @@ class CustmnameandFavourit extends StatelessWidget {
         CustomIconButton(
           icon: Icons.favorite,
           onPressed: () {},
-        )
+        ),
       ],
     );
   }
