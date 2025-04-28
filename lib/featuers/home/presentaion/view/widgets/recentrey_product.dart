@@ -5,13 +5,15 @@ import 'package:our_market/core/function/navigator_push.dart';
 import 'package:our_market/core/widgets/app_colors.dart';
 import 'package:our_market/core/widgets/subtitel_text_widget.dart';
 import 'package:our_market/core/widgets/titel_text_widget.dart';
+import 'package:our_market/featuers/home/data/product_model.dart';
 import 'package:our_market/featuers/product_detalse/presentation/view/product_detalse_view.dart';
 
 class AllProduct extends StatelessWidget {
   const AllProduct({
     super.key,
+    required this.product,
   });
-
+  final ProductModel product;
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -26,14 +28,14 @@ class AllProduct extends StatelessWidget {
             children: [
               Stack(
                 children: [
-                  const ClipRRect(
+                  ClipRRect(
                     borderRadius: const BorderRadius.only(
                       topRight: Radius.circular(12),
                       bottomRight: Radius.circular(12),
                       bottomLeft: Radius.circular(12),
                     ),
                     child: ShimmerImage(
-                      imageUrl:
+                      imageUrl: product.imageUrl ??
                           "https://ichef.bbci.co.uk/news/1024/cpsprodpb/14235/production/_100058428_mediaitem100058424.jpg.webp",
                     ),
                   ),
@@ -49,8 +51,8 @@ class AllProduct extends StatelessWidget {
                         bottomRight: Radius.circular(12),
                       ),
                     ),
-                    child: const SubtitelTextWidget(
-                      text: "10% OFF",
+                    child: SubtitelTextWidget(
+                      text: "${product.sale} OFF",
                       fontSize: 20,
                       color: Colors.white,
                     ),
@@ -67,8 +69,8 @@ class AllProduct extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const TitelTextWidget(
-                          text: "Product Three",
+                        TitelTextWidget(
+                          text: product.productName ?? "",
                           fontSize: 25,
                         ),
                         IconButton(
@@ -87,15 +89,15 @@ class AllProduct extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Column(
+                        Column(
                           children: [
                             SubtitelTextWidget(
-                              text: r"$1233",
+                              text: "${product.price}",
                               fontWeight: FontWeight.bold,
                               fontSize: 25,
                             ),
                             SubtitelTextWidget(
-                              text: r"$1233",
+                              text: product.oldPrice ?? "",
                               fontSize: 20,
                               decoration: TextDecoration.lineThrough,
                               color: Colors.grey,
