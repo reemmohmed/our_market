@@ -93,65 +93,57 @@ class NaveBar extends StatelessWidget {
     );
   }
 }
-    
-    
-    
-    
-    
-    
-    // BlocProvider(
-    //   create: (context) => NaveBarCubitCubit(),
-    //   child: Scaffold(
-    //     body: BlocBuilder<NaveBarCubitCubit, NaveBarCubitState>(
-    //       builder: (context, state) {
-    //         final changeView = context.read<NaveBarCubitCubit>();
 
-    //         return SafeArea(child: pageView[changeView.currentIndex]);
-    //       },
-    //     ),
-    //     bottomNavigationBar: Padding(
-    //       padding: const EdgeInsets.all(16.0),
-    //       child: GNav(
-    //           onTabChange: (value) {
-    //             context.read<NaveBarCubitCubit>().changcurrentPage(value);
-    //           },
-    //           rippleColor:
-    //               Colors.grey[800]!, // tab button ripple color when pressed
-    //           hoverColor: Colors.grey[700]!, // tab button hover color
-    //           haptic: true, // haptic feedback
-    //           tabBorderRadius: 12,
-    //           curve: Curves.easeIn, // tab animation curves
-    //           duration:
-    //               const Duration(milliseconds: 400), // tab animation duration
-    //           gap: 8, // the tab button gap between icon and text
-    //           color: AppColors.darkScaffold, // unselected icon color
-    //           activeColor:
-    //               AppColors.kprimaryColoblue, // selected icon and text color
-    //           iconSize: 24, // tab button icon size
+// BlocProvider(
+//   create: (context) => NaveBarCubitCubit(),
+//   child: Scaffold(
+//     body: BlocBuilder<NaveBarCubitCubit, NaveBarCubitState>(
+//       builder: (context, state) {
+//         final changeView = context.read<NaveBarCubitCubit>();
 
-    //           padding: const EdgeInsets.symmetric(
-    //               horizontal: 20, vertical: 5), // navigation bar padding
-    //           tabs: const [
-    //             GButton(
-    //               icon: Ionicons.home,
-    //               text: 'Home',
-    //             ),
-    //             GButton(
-    //               icon: Ionicons.heart,
-    //               text: 'Likes',
-    //             ),
-    //             GButton(
-    //               icon: Ionicons.search,
-    //               text: 'Search',
-    //             ),
-    //             GButton(
-    //               icon: Ionicons.person,
-    //               text: 'Profile',
-    //             )
-    //           ]),
-    //     ),
-    //   ),
-    // );
- 
- 
- 
+//         return SafeArea(child: pageView[changeView.currentIndex]);
+//       },
+//     ),
+//     bottomNavigationBar: Padding(
+//       padding: const EdgeInsets.all(16.0),
+//       child: GNav(
+//           onTabChange: (value) {
+//             context.read<NaveBarCubitCubit>().changcurrentPage(value);
+//           },
+//           rippleColor:
+//               Colors.grey[800]!, // tab button ripple color when pressed
+//           hoverColor: Colors.grey[700]!, // tab button hover color
+//           haptic: true, // haptic feedback
+//           tabBorderRadius: 12,
+//           curve: Curves.easeIn, // tab animation curves
+//           duration:
+//               const Duration(milliseconds: 400), // tab animation duration
+//           gap: 8, // the tab button gap between icon and text
+//           color: AppColors.darkScaffold, // unselected icon color
+//           activeColor:
+//               AppColors.kprimaryColoblue, // selected icon and text color
+//           iconSize: 24, // tab button icon size
+
+//           padding: const EdgeInsets.symmetric(
+//               horizontal: 20, vertical: 5), // navigation bar padding
+//           tabs: const [
+//             GButton(
+//               icon: Ionicons.home,
+//               text: 'Home',
+//             ),
+//             GButton(
+//               icon: Ionicons.heart,
+//               text: 'Likes',
+//             ),
+//             GButton(
+//               icon: Ionicons.search,
+//               text: 'Search',
+//             ),
+//             GButton(
+//               icon: Ionicons.person,
+//               text: 'Profile',
+//             )
+//           ]),
+//     ),
+//   ),
+// );

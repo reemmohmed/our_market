@@ -15,7 +15,7 @@ class ApiServes {
     return await _dio.post(path, data: data);
   }
 
-  Future<Response> putdata(String path, Map<String, dynamic> data) async {
+  Future<Response> patchdata(String path, Map<String, dynamic> data) async {
     return await _dio.patch(path, data: data);
   }
 
