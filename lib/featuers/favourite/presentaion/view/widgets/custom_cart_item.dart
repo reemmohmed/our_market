@@ -17,7 +17,9 @@ class CustomCardItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
-        onTap: () => navigatorTo(context, const ProductDetalseView()),
+        // onTap: () => navigatorTo(context, const ProductDetalseView(
+
+        // )),
         child: Card(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

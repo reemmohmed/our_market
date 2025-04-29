@@ -21,7 +21,12 @@ class AllProduct extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
-        onTap: () => navigatorTo(context, const ProductDetalseView()),
+        onTap: () => navigatorTo(
+          context,
+          ProductDetalseView(
+            product: product,
+          ),
+        ),
         child: Card(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

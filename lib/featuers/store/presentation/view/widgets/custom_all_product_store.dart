@@ -5,17 +5,22 @@ import 'package:our_market/core/function/navigator_push.dart';
 import 'package:our_market/core/widgets/app_colors.dart';
 import 'package:our_market/core/widgets/subtitel_text_widget.dart';
 import 'package:our_market/core/widgets/titel_text_widget.dart';
+import 'package:our_market/featuers/home/data/product_model.dart';
 import 'package:our_market/featuers/product_detalse/presentation/view/product_detalse_view.dart';
 
 class CustomAllProductStore extends StatelessWidget {
-  const CustomAllProductStore({super.key});
+  const CustomAllProductStore({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
-        onTap: () => navigatorTo(context, const ProductDetalseView()),
+        // onTap: () => navigatorTo(context,  ProductDetalseView(
+        //   product: product ,
+        // )),
         child: Card(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

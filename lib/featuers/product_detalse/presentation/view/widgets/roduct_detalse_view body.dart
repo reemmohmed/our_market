@@ -4,6 +4,8 @@ import 'package:our_market/core/widgets/subtitel_text_widget.dart';
 import 'package:our_market/core/widgets/titel_text_widget.dart';
 import 'package:our_market/featuers/auth/presentaion/view/widget/custom_elevated_button.dart';
 import 'package:our_market/featuers/auth/presentaion/view/widget/custom_tet_form.dart';
+import 'package:our_market/featuers/home/data/product_model.dart';
+import 'package:our_market/featuers/home/mange/Home_mange/home_cubit.dart';
 import 'package:our_market/featuers/product_detalse/mange/DotesImage/dotes_image_cubit.dart';
 import 'package:our_market/featuers/product_detalse/presentation/view/widgets/componantsview/custom_buttom_buy.dart';
 import 'package:our_market/featuers/product_detalse/presentation/view/widgets/componantsview/custom_detals_price.dart';
@@ -17,17 +19,14 @@ import 'package:our_market/featuers/product_detalse/presentation/view/widgets/pr
 import 'componantsview/custom_rating.dart';
 
 class ProductDetailBody extends StatelessWidget {
-  const ProductDetailBody({super.key});
-
+  const ProductDetailBody({
+    super.key,
+    required this.product,
+  });
+  final ProductModel product;
   @override
   Widget build(BuildContext context) {
-    // قائمة الصور التي سيتم تمريرها إلى RoductDetalseViewBody
-    final List<String> imageUrls = [
-      "https://ichef.bbci.co.uk/news/1024/cpsprodpb/14235/production/_100058428_mediaitem100058424.jpg.webp",
-      "https://ichef.bbci.co.uk/news/1024/cpsprodpb/14235/production/_100058428_mediaitem100058424.jpg.webp",
-      "https://ichef.bbci.co.uk/news/1024/cpsprodpb/14235/production/_100058428_mediaitem100058424.jpg.webp",
-      // أضف المزيد من الصور هنا
-    ];
+    // final List<ProductModel> products = context.read<HomeCubit>().products;
 
     return BlocProvider(
       create: (_) => DotesImageCubit(),
@@ -36,19 +35,23 @@ class ProductDetailBody extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              ProductImageCarousel(imageUrls: imageUrls),
+              ProductImageCarousel(
+                  imageUrls:
+                      product.imageUrl != null ? [product.imageUrl!] : []),
               const SizedBox(height: 12),
-              ProductDotsIndicator(imageUrls: imageUrls),
+              ProductDotsIndicator(
+                  imageUrls:
+                      product.imageUrl != null ? [product.imageUrl!] : []),
               const SizedBox(
                 height: 9,
               ),
               const CustomTotalrating(),
-              const CustomDetalsPrice(),
-              const CustmnameandFavourit(),
-              const SubtitelTextWidget(
-                  maxLines: 4,
-                  text:
-                      "productNameproductNameproductNameproductNameproductNameproductNameproductNameproductName"),
+              CustomDetalsPrice(
+                product: product,
+              ),
+              CustmnameandFavourit(
+                product: product,
+              ),
               const SizedBox(
                 height: 10,
               ),
