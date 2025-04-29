@@ -12,6 +12,7 @@ part 'rates_state.dart';
 class RatesCubit extends Cubit<RatesState> {
   RatesCubit() : super(RatesInitial());
   final ApiServes apiServes = ApiServes();
+  var UserId = Supabase.instance.client.auth.currentUser!.id;
   int averagerate = 0;
   int userRate = 5;
   List<RatesModel> rates = [];
@@ -25,6 +26,7 @@ class RatesCubit extends Cubit<RatesState> {
       }
       _getRates();
       _getRateUser();
+      // test getratUSER
       // log("userId is ${Supabase.instance.client.auth.currentUser!.id}");
       // log("user rate is ${rateUser[0].forUser}");
       // log("ratUserleaght  is ${rateUser.length}");
@@ -40,10 +42,9 @@ class RatesCubit extends Cubit<RatesState> {
   }
 
   void _getRateUser() {
-    List<RatesModel> rateUser = rates
-        .where((RatesModel rate) =>
-            rate.forUser == Supabase.instance.client.auth.currentUser!.id)
-        .toList();
+    List<RatesModel> rateUser = rates.where((RatesModel rate) {
+      return rate.forUser == UserId;
+    }).toList();
     if (rateUser.isNotEmpty) {
       userRate = rateUser[0].rate!;
     } else {
@@ -60,5 +61,40 @@ class RatesCubit extends Cubit<RatesState> {
       }
     }
     averagerate = averagerate ~/ rates.length;
+  }
+
+// this function is used to check if the user has already rated the product
+  // if the user has already rated the product, return true
+  // else return false
+  bool _isUserRateExiets({required String productId}) {
+    for (var rate in rates) {
+      if ((rate.forUser == UserId) && (rate.forProduct == productId)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+// this function is used to add or update the rate for the user
+  Future<void> addrateorputchrate(
+      {required String productId, required Map<String, dynamic> data}) async {
+    String path =
+        "rates_table?select=*&for_product=eq.$productId&for_user=eq.$UserId";
+    emit(AddOrPutchRateRateForUserLoding());
+    try {
+      // if the user has already rated the product, update the rate
+      if (_isUserRateExiets(productId: productId)) {
+        // patch rate
+        await apiServes.patchdata(path, data);
+      } else {
+        // post for the rate
+        await apiServes.postdata(path, data);
+      }
+      log("data addrateorputchrate  is $data");
+      emit(AddOrPutchRateRateForUserSuccess());
+    } catch (e) {
+      log(e.toString());
+      emit(AddOrPutchRateRateForUserFailure());
+    }
   }
 }

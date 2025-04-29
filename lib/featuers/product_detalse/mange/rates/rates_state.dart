@@ -10,3 +10,9 @@ final class RatesLoading extends RatesState {}
 final class RatesSuccess extends RatesState {}
 
 final class RatesFailure extends RatesState {}
+
+final class AddOrPutchRateRateForUserLoding extends RatesState {}
+
+final class AddOrPutchRateRateForUserSuccess extends RatesState {}
+
+final class AddOrPutchRateRateForUserFailure extends RatesState {}
