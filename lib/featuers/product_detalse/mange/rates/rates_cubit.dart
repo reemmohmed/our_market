@@ -11,6 +11,7 @@ part 'rates_state.dart';
 class RatesCubit extends Cubit<RatesState> {
   RatesCubit() : super(RatesInitial());
   final ApiServes apiServes = ApiServes();
+  int averagerate = 0;
   List<RatesModel> rates = [];
   Future<void> getRates({required String productId}) async {
     emit(RatesLoading());
@@ -20,13 +21,25 @@ class RatesCubit extends Cubit<RatesState> {
       for (var rate in response.data) {
         rates.add(RatesModel.fromJson(rate));
       }
+      _getRates();
 
-      log(rates.toString());
+      log(rates.length.toString());
 
       emit(RatesSuccess());
     } catch (e) {
       log(e.toString());
       emit(RatesFailure());
     }
+  }
+
+// this function is used to calculate the average rate
+  void _getRates() {
+    for (var rateUser in rates) {
+      log(rateUser.rate.toString());
+      if (rateUser.rate != null) {
+        averagerate += rateUser.rate!;
+      }
+    }
+    averagerate = averagerate ~/ rates.length;
   }
 }

@@ -4,16 +4,17 @@ import 'package:our_market/core/widgets/subtitel_text_widget.dart';
 class CustomTotalrating extends StatelessWidget {
   const CustomTotalrating({
     super.key,
+    required this.text,
   });
-
+  final String text;
   @override
   Widget build(BuildContext context) {
-    return const Padding(
+    return Padding(
       padding: EdgeInsets.symmetric(horizontal: 10),
       child: Row(
         children: [
           SubtitelTextWidget(
-            text: "3",
+            text: text,
             fontSize: 20,
           ),
           Icon(
