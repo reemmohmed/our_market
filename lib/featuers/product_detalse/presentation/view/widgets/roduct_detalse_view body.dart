@@ -86,7 +86,9 @@ class ProductDetailBody extends StatelessWidget {
                         const SizedBox(
                           height: 16,
                         ),
-                        const CustomRating(),
+                        CustomRating(
+                          initialRating: cubit.userRate.toDouble(),
+                        ),
                         const Align(
                           alignment: Alignment.topLeft,
                           child: TitelTextWidget(
