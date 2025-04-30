@@ -20,7 +20,7 @@ class HomeCubit extends Cubit<HomeState> {
       for (var product in respose.data) {
         products.add(ProductModel.fromJson(product));
       }
-      log(respose.data.toString());
+      // log(respose.data.toString());
       emit(GetDataSuccess());
     } catch (e) {
       log(e.toString());

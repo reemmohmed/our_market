@@ -60,7 +60,9 @@ class RatesCubit extends Cubit<RatesState> {
         averagerate += rateUsers.rate!;
       }
     }
-    averagerate = averagerate ~/ rates.length;
+    if (rates.isNotEmpty) {
+      averagerate = averagerate ~/ rates.length;
+    }
   }
 
 // this function is used to check if the user has already rated the product
@@ -91,6 +93,11 @@ class RatesCubit extends Cubit<RatesState> {
         await apiServes.postdata(path, data);
       }
       log("data addrateorputchrate  is $data");
+      // await Supabase.instance.client.from("rates_table").upsert(data);
+      // // أو أي لوجيك تضيف أو تحدث فيه التقييم
+      // await getRates(productId: productId); // تحديث القائمة
+
+      await getRates(productId: productId);
       emit(AddOrPutchRateRateForUserSuccess());
     } catch (e) {
       log(e.toString());

@@ -4,7 +4,7 @@ import 'package:our_market/core/widgets/titel_text_widget.dart';
 import 'package:our_market/featuers/auth/presentaion/view/widget/custom_elevated_button.dart';
 import 'package:our_market/featuers/home/data/product_model.dart';
 
-import 'widgets/roduct_detalse_view body.dart';
+import 'widgets/product_detalse_view body.dart';
 
 class ProductDetalseView extends StatelessWidget {
   const ProductDetalseView({super.key, required this.product});

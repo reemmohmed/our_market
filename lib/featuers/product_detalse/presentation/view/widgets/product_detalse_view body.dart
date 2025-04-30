@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:our_market/core/function/navigate_without_back.dart';
 import 'package:our_market/core/widgets/circle_loading.dart';
-import 'package:our_market/core/widgets/subtitel_text_widget.dart';
 import 'package:our_market/core/widgets/titel_text_widget.dart';
 import 'package:our_market/featuers/auth/presentaion/view/widget/custom_elevated_button.dart';
 import 'package:our_market/featuers/auth/presentaion/view/widget/custom_tet_form.dart';
 import 'package:our_market/featuers/home/data/product_model.dart';
-import 'package:our_market/featuers/home/mange/Home_mange/home_cubit.dart';
 import 'package:our_market/featuers/product_detalse/mange/DotesImage/dotes_image_cubit.dart';
 import 'package:our_market/featuers/product_detalse/mange/rates/rates_cubit.dart';
+import 'package:our_market/featuers/product_detalse/presentation/view/product_detalse_view.dart';
 import 'package:our_market/featuers/product_detalse/presentation/view/widgets/componantsview/custom_buttom_buy.dart';
 import 'package:our_market/featuers/product_detalse/presentation/view/widgets/componantsview/custom_detals_price.dart';
 import 'package:our_market/featuers/product_detalse/presentation/view/widgets/componantsview/custom_list_comment.dart';
@@ -40,14 +40,17 @@ class ProductDetailBody extends StatelessWidget {
         ),
       ],
       child: BlocConsumer<RatesCubit, RatesState>(
-        listener: (context, state) {
-          // TODO: implement listener
+        listener: (context, state) async {
+          if (state is AddOrPutchRateRateForUserSuccess) {
+            navigateWithoutBack(context, ProductDetalseView(product: product));
+          }
         },
         builder: (context, state) {
           // access the rates from the cubit
           // final List<RatesModel> rates = context.read<RatesCubit>().rates;
           RatesCubit cubit = context.read<RatesCubit>();
-          ;
+          // watch send or read data of one only
+          // RatesCubit cubitubdaterate = context.watch<RatesCubit>();
           return state is RatesLoading
               ? const CircleLoading()
               : Padding(
@@ -87,6 +90,16 @@ class ProductDetailBody extends StatelessWidget {
                           height: 16,
                         ),
                         CustomRating(
+                          onRatingUpdate: (rating) {
+                            cubit.addrateorputchrate(
+                              productId: product.productId!,
+                              data: {
+                                "for_user": cubit.UserId,
+                                "for_product": product.productId,
+                                "rate": rating.toInt(),
+                              },
+                            );
+                          },
                           initialRating: cubit.userRate.toDouble(),
                         ),
                         const Align(
