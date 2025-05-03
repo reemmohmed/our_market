@@ -21,10 +21,16 @@ class HomeCubit extends Cubit<HomeState> {
         products.add(ProductModel.fromJson(product));
       }
       // log(respose.data.toString());
-      emit(GetDataSuccess());
+      if (!isClosed) {
+        // التأكد من أن الـ Cubit لم يغلق بعد
+        emit(GetDataSuccess());
+      }
     } catch (e) {
       log(e.toString());
-      emit(GetDataError());
+      if (!isClosed) {
+        // التأكد من أن الـ Cubit لم يغلق بعد
+        emit(GetDataError());
+      }
     }
   }
 }
