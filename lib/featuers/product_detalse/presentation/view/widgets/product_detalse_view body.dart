@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:our_market/core/function/navigate_without_back.dart';
 import 'package:our_market/core/widgets/circle_loading.dart';
 import 'package:our_market/core/widgets/titel_text_widget.dart';
+import 'package:our_market/featuers/auth/presentaion/data/user_data_model.dart';
+import 'package:our_market/featuers/auth/presentaion/manger/cubit/authentication_cubit.dart';
 import 'package:our_market/featuers/auth/presentaion/view/widget/custom_elevated_button.dart';
 import 'package:our_market/featuers/auth/presentaion/view/widget/custom_tet_form.dart';
 import 'package:our_market/featuers/home/data/product_model.dart';
@@ -20,12 +22,25 @@ import 'package:our_market/featuers/product_detalse/presentation/view/widgets/pr
 
 import 'componantsview/custom_rating.dart';
 
-class ProductDetailBody extends StatelessWidget {
+class ProductDetailBody extends StatefulWidget {
   const ProductDetailBody({
     super.key,
     required this.product,
   });
   final ProductModel product;
+
+  @override
+  State<ProductDetailBody> createState() => _ProductDetailBodyState();
+}
+
+class _ProductDetailBodyState extends State<ProductDetailBody> {
+  final TextEditingController _commsentController = TextEditingController();
+  @override
+  void dispose() {
+    _commsentController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     // final List<ProductModel> products = context.read<HomeCubit>().products;
@@ -36,22 +51,23 @@ class ProductDetailBody extends StatelessWidget {
           create: (_) => DotesImageCubit(),
         ),
         BlocProvider(
-          create: (_) => RatesCubit()..getRates(productId: product.productId!),
+          create: (_) =>
+              RatesCubit()..getRates(productId: widget.product.productId!),
         ),
       ],
       child: BlocConsumer<RatesCubit, RatesState>(
         listener: (context, state) async {
           if (state is AddOrPutchRateRateForUserSuccess) {
-            navigateWithoutBack(context, ProductDetalseView(product: product));
+            navigateWithoutBack(
+                context, ProductDetalseView(product: widget.product));
           }
         },
         builder: (context, state) {
-          // access the rates from the cubit
-          // final List<RatesModel> rates = context.read<RatesCubit>().rates;
           RatesCubit cubit = context.read<RatesCubit>();
+
           // watch send or read data of one only
           // RatesCubit cubitubdaterate = context.watch<RatesCubit>();
-          return state is RatesLoading
+          return state is RatesLoading || state is AddCoomentLoding
               ? const CircleLoading()
               : Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -59,13 +75,13 @@ class ProductDetailBody extends StatelessWidget {
                     child: Column(
                       children: [
                         ProductImageCarousel(
-                            imageUrls: product.imageUrl != null
-                                ? [product.imageUrl!]
+                            imageUrls: widget.product.imageUrl != null
+                                ? [widget.product.imageUrl!]
                                 : []),
                         const SizedBox(height: 12),
                         ProductDotsIndicator(
-                            imageUrls: product.imageUrl != null
-                                ? [product.imageUrl!]
+                            imageUrls: widget.product.imageUrl != null
+                                ? [widget.product.imageUrl!]
                                 : []),
                         const SizedBox(
                           height: 9,
@@ -74,10 +90,10 @@ class ProductDetailBody extends StatelessWidget {
                           text: "${cubit.rates.length}",
                         ),
                         CustomDetalsPrice(
-                          product: product,
+                          product: widget.product,
                         ),
                         CustmnameandFavourit(
-                          product: product,
+                          product: widget.product,
                         ),
                         const SizedBox(
                           height: 10,
@@ -92,10 +108,10 @@ class ProductDetailBody extends StatelessWidget {
                         CustomRating(
                           onRatingUpdate: (rating) {
                             cubit.addrateorputchrate(
-                              productId: product.productId!,
+                              productId: widget.product.productId!,
                               data: {
                                 "for_user": cubit.UserId,
-                                "for_product": product.productId,
+                                "for_product": widget.product.productId,
                                 "rate": rating.toInt(),
                               },
                             );
@@ -109,9 +125,25 @@ class ProductDetailBody extends StatelessWidget {
                             fontSize: 25,
                           ),
                         ),
-                        const CustomTextForm(
+                        CustomTextForm(
+                          controller: _commsentController,
                           lableText: " Type Your feadback",
-                          suffixIcon: CustomIconButton(icon: Icons.send),
+                          suffixIcon: CustomIconButton(
+                            icon: Icons.send,
+                            onPressed: () async {
+                              await cubit.addComments(data: {
+                                "comment": _commsentController.text.trim(),
+                                "for_user": cubit.UserId,
+                                "for_product": widget.product.productId,
+                                "user_name": context
+                                        .read<AuthenticationCubit>()
+                                        .userData
+                                        ?.name ??
+                                    "User",
+                              });
+                              _commsentController.clear();
+                            },
+                          ),
                         ),
                         const CustomListComment()
                       ],

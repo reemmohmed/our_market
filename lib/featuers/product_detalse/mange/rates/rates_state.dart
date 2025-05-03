@@ -16,3 +16,9 @@ final class AddOrPutchRateRateForUserLoding extends RatesState {}
 final class AddOrPutchRateRateForUserSuccess extends RatesState {}
 
 final class AddOrPutchRateRateForUserFailure extends RatesState {}
+
+final class AddCoomentLoding extends RatesState {}
+
+final class AddCoomentSuccess extends RatesState {}
+
+final class AddCoomentFailure extends RatesState {}

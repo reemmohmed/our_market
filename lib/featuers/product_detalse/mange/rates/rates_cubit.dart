@@ -104,4 +104,20 @@ class RatesCubit extends Cubit<RatesState> {
       emit(AddOrPutchRateRateForUserFailure());
     }
   }
+
+  Future<void> addComments({required Map<String, dynamic> data}) async {
+    emit(AddCoomentLoding());
+    try {
+      // await apiServes.postdata(path, data);
+      // await getRates(productId: productId);
+      String path = "comments_table";
+      apiServes.postdata(path, data);
+      log("add Cooments = >  ${data.toString()}");
+
+      emit(AddCoomentSuccess());
+    } catch (e) {
+      log(e.toString());
+      emit(AddCoomentFailure());
+    }
+  }
 }

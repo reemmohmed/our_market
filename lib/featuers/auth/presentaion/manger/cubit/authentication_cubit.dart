@@ -120,6 +120,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         'name': name,
         'email': email
       });
+
       emit(AddUserIdToDataBseSucsess());
     } catch (e) {
       log(e.toString());
