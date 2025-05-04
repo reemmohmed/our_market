@@ -7,8 +7,9 @@ import 'package:our_market/featuers/auth/presentaion/view/widget/custom_elevated
 class CustomAppbar extends StatelessWidget {
   const CustomAppbar({
     super.key,
+    this.onPressed,
   });
-
+  final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -18,7 +19,8 @@ class CustomAppbar extends StatelessWidget {
           const CustomIconButton(
             icon: Ionicons.notifications_outline,
           ),
-          const CustomIconButton(
+          CustomIconButton(
+            onPressed: onPressed,
             icon: Ionicons.search_outline,
           ),
           const Spacer(),

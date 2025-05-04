@@ -13,7 +13,10 @@ class HomeViewBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const TextAppShammer(lable: "Catogeres"),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: const TextAppShammer(lable: "Catogeres"),
+          ),
           const CatogetyList(),
           const SizedBox(
             height: 7.5,
