@@ -12,7 +12,8 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
   final ApiServes _apiServes = ApiServes();
   List<ProductModel> products = [];
-  Future<void> getProduct() async {
+  List<ProductModel> saechResult = [];
+  Future<void> getProduct({String? query}) async {
     emit(GetDataLoading());
     try {
       Response respose = await _apiServes.getdata(
@@ -20,6 +21,8 @@ class HomeCubit extends Cubit<HomeState> {
       for (var product in respose.data) {
         products.add(ProductModel.fromJson(product));
       }
+
+      searchproduct(query);
       // log(respose.data.toString());
       if (!isClosed) {
         // التأكد من أن الـ Cubit لم يغلق بعد
@@ -30,6 +33,17 @@ class HomeCubit extends Cubit<HomeState> {
       if (!isClosed) {
         // التأكد من أن الـ Cubit لم يغلق بعد
         emit(GetDataError());
+      }
+    }
+  }
+
+  // saerch for product in the list
+  void searchproduct(String? query) {
+    if (query != null) {
+      for (var product in products) {
+        if (product.productName!.toLowerCase().contains(query.toLowerCase())) {
+          saechResult.add(product);
+        }
       }
     }
   }
