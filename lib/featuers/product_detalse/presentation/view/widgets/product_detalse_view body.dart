@@ -131,6 +131,9 @@ class _ProductDetailBodyState extends State<ProductDetailBody> {
                           suffixIcon: CustomIconButton(
                             icon: Icons.send,
                             onPressed: () async {
+                              await context
+                                  .read<AuthenticationCubit>()
+                                  .getUserData();
                               await cubit.addComments(data: {
                                 "comment": _commsentController.text.trim(),
                                 "for_user": cubit.UserId,
