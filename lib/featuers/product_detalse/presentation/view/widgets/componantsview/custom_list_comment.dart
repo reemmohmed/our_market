@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:our_market/core/widgets/circle_loading.dart';
 import 'package:our_market/core/widgets/subtitel_text_widget.dart';
 import 'package:our_market/featuers/home/data/product_model.dart';
+import 'package:our_market/featuers/product_detalse/data/commentdata.dart';
 import 'package:our_market/featuers/product_detalse/presentation/view/widgets/componantsview/comment_user.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -25,14 +26,22 @@ class CustomListComment extends StatelessWidget {
             return const CircleLoading();
           } else if (!snapshot.hasData) {
             return const Center(
-              child: SubtitelTextWidget(text: "No Comment data Yet"),
+              child: SubtitelTextWidget(
+                text: "No Comment data Yet",
+                fontSize: 19,
+                fontWeight: FontWeight.w700,
+              ),
             );
           } else if (snapshot.hasData) {
             return ListView.separated(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
-                  return const CommentUser();
+                  final comment = Commentdata.fromJson(data![index]);
+
+                  return CommentUser(
+                    commentdata: comment,
+                  );
                 },
                 separatorBuilder: (context, index) {
                   return const Divider(
@@ -42,11 +51,11 @@ class CustomListComment extends StatelessWidget {
                     endIndent: 20,
                   );
                 },
-                itemCount: 10);
+                itemCount: data?.length ?? 0);
           } else {
             return const Center(
               child: SubtitelTextWidget(
-                  text: "Somthing winth wrong plese try again later"),
+                  text: "Somthing winth wrong , plese try again later"),
             );
           }
         });
