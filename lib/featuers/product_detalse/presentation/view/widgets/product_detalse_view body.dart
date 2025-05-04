@@ -145,7 +145,9 @@ class _ProductDetailBodyState extends State<ProductDetailBody> {
                             },
                           ),
                         ),
-                        const CustomListComment()
+                        CustomListComment(
+                          productModel: widget.product,
+                        ),
                       ],
                     ),
                   ),
