@@ -19,6 +19,7 @@ class AllProductList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final homeCubit = context.read<HomeCubit>();
+
     return BlocConsumer<HomeCubit, HomeState>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -42,6 +43,8 @@ class AllProductList extends StatelessWidget {
                     itemCount: products.length,
                     itemBuilder: (context, index) {
                       return AllProduct(
+                          isFavourite: homeCubit
+                              .checkIsFavorite(products[index].productId!),
                           onPressed: () {
                             homeCubit
                                 .addToFavourtes(products[index].productId!);

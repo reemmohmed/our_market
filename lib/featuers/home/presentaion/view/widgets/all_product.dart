@@ -13,9 +13,11 @@ class AllProduct extends StatelessWidget {
     super.key,
     required this.product,
     this.onPressed,
+    required this.isFavourite,
   });
   final ProductModel product;
   final void Function()? onPressed;
+  final bool isFavourite;
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -83,9 +85,13 @@ class AllProduct extends StatelessWidget {
                         IconButton(
                           onPressed: onPressed,
                           icon: Icon(
-                            Ionicons.heart_outline,
+                            isFavourite
+                                ? Ionicons.heart
+                                : Ionicons.heart_outline,
                             size: 30,
-                            color: Theme.of(context).colorScheme.onSurface,
+                            color: isFavourite
+                                ? AppColors.ksignUp
+                                : Theme.of(context).colorScheme.onSurface,
                           ),
                         ),
                       ],

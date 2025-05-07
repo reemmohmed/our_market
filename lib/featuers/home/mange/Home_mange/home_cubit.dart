@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
 import 'package:our_market/core/AppServer/api_serves.dart';
 import 'package:our_market/featuers/home/data/product_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 part 'home_state.dart';
@@ -69,7 +70,8 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  // void addToFavourites_product
+//   void addToFavourites_product
+  Map<String, bool> favoriteProducts = {};
   Future<void> addToFavourtes(String productId) async {
     emit(AddToFavourtesLoading());
 
@@ -82,10 +84,17 @@ class HomeCubit extends Cubit<HomeState> {
         "for_productid": productId,
       });
       log("dataFavourites: ${dataFavourites.data}");
+      favoriteProducts.addAll({
+        productId: true,
+      });
       emit(AddToFavourtesSuccess());
     } catch (e) {
       log(e.toString());
       emit(AddToFavourtesError());
     }
+  }
+
+  bool checkIsFavorite(String productId) {
+    return favoriteProducts.containsKey(productId);
   }
 }
