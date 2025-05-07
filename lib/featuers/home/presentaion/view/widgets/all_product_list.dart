@@ -18,29 +18,37 @@ class AllProductList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final homeCubit = context.read<HomeCubit>();
     return BlocConsumer<HomeCubit, HomeState>(
       listener: (context, state) {},
       builder: (context, state) {
         List<ProductModel> products;
 
         if (query != null) {
-          products = context.watch<HomeCubit>().saechResult;
+          products = homeCubit.saechResult;
         } else if (catogery != null) {
-          products = context.watch<HomeCubit>().catogeres;
+          products = homeCubit.catogeres;
         } else {
-          products = context.watch<HomeCubit>().products;
+          products = homeCubit.products;
         }
 
         return state is GetDataLoading
             ? const CircleLoading()
-            : ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: products.length,
-                itemBuilder: (context, index) {
-                  return AllProduct(product: products[index]);
-                },
-              );
+            : products.isEmpty
+                ? const Center(child: Text("No products found"))
+                : ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      return AllProduct(
+                          onPressed: () {
+                            homeCubit
+                                .addToFavourtes(products[index].productId!);
+                          },
+                          product: products[index]);
+                    },
+                  );
       },
     );
   }

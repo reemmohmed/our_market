@@ -54,7 +54,9 @@ import 'package:our_market/featuers/home/presentaion/view/widgets/home_view_body
 import 'package:our_market/featuers/search/presentation/view/search_view.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+  const HomeView({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

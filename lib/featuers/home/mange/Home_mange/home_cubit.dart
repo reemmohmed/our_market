@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
 import 'package:our_market/core/AppServer/api_serves.dart';
 import 'package:our_market/featuers/home/data/product_model.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 part 'home_state.dart';
 
@@ -14,6 +15,7 @@ class HomeCubit extends Cubit<HomeState> {
   List<ProductModel> products = [];
   List<ProductModel> saechResult = [];
   List<ProductModel> catogeres = [];
+  String? userId = Supabase.instance.client.auth.currentUser!.id;
 
   Future<void> getProduct({String? query, String? catogery}) async {
     emit(GetDataLoading());
@@ -43,18 +45,20 @@ class HomeCubit extends Cubit<HomeState> {
 
   // saerch for product in the list// search  is any word in the product name
   void searchproduct(String? query) {
+    saechResult.clear(); // مسح النتائج السابقة
     if (query != null) {
       for (var product in products) {
         if (product.productName!.toLowerCase().contains(query.toLowerCase())) {
           saechResult.add(product);
         }
       }
+      log("Search Results: ${saechResult.map((product) => product.productName).toList()}");
     }
   }
 
   void getCatogery(String? catogery) {
     for (var product in products) {
-      print("product category: '${product.catogery}'");
+      // print("product category: '${product.catogery}'");
     }
     if (catogery != null) {
       for (var product in products) {
@@ -62,6 +66,26 @@ class HomeCubit extends Cubit<HomeState> {
           catogeres.add(product);
         }
       }
+    }
+  }
+
+  // void addToFavourites_product
+  Future<void> addToFavourtes(String productId) async {
+    emit(AddToFavourtesLoading());
+
+    try {
+      String path = "favourtes_product";
+
+      Response dataFavourites = await _apiServes.postdata(path, {
+        "is_favourite": true,
+        "for_userid": userId,
+        "for_productid": productId,
+      });
+      log("dataFavourites: ${dataFavourites.data}");
+      emit(AddToFavourtesSuccess());
+    } catch (e) {
+      log(e.toString());
+      emit(AddToFavourtesError());
     }
   }
 }

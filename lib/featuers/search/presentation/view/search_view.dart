@@ -67,6 +67,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:our_market/core/componant/custom_app_bar.dart';
 import 'package:our_market/core/widgets/titel_text_widget.dart';
 import 'package:our_market/featuers/auth/presentaion/view/widget/custom_elevated_button.dart';
+import 'package:our_market/featuers/home/mange/Home_mange/home_cubit.dart';
 import 'package:our_market/featuers/home/presentaion/view/widgets/all_product_list.dart';
 
 class SearchView extends StatelessWidget {
@@ -75,6 +76,7 @@ class SearchView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<HomeCubit>().searchproduct(query);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(

@@ -12,8 +12,10 @@ class AllProduct extends StatelessWidget {
   const AllProduct({
     super.key,
     required this.product,
+    this.onPressed,
   });
   final ProductModel product;
+  final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -79,7 +81,7 @@ class AllProduct extends StatelessWidget {
                           fontSize: 25,
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: onPressed,
                           icon: Icon(
                             Ionicons.heart_outline,
                             size: 30,
