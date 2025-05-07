@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:our_market/core/function/navigator_push.dart';
+import 'package:our_market/featuers/home/presentaion/catogers_view.dart';
 import 'package:our_market/featuers/home/presentaion/view/widgets/catogery_item.dart';
 
 class CatogeriesModel {
@@ -11,8 +13,8 @@ class CatogeriesModel {
 class CatogetyList extends StatelessWidget {
   const CatogetyList({super.key});
   final List<CatogeriesModel> catogers = const [
-    CatogeriesModel(icon: Icons.sports_baseball_outlined, text: "Sports"),
-    CatogeriesModel(icon: Icons.tv, text: "Electoronic "),
+    CatogeriesModel(icon: Icons.sports_baseball_outlined, text: "sport"),
+    CatogeriesModel(icon: Icons.tv, text: "electornic"),
     CatogeriesModel(icon: Icons.collections, text: "Collections"),
     CatogeriesModel(icon: Icons.sports, text: "store"),
     CatogeriesModel(icon: Icons.sports_esports_rounded, text: "Game"),
@@ -29,8 +31,12 @@ class CatogetyList extends StatelessWidget {
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
-              child: CatogeryItem(
-                catogery: catogers[index],
+              child: GestureDetector(
+                onTap: () => navigatorTo(
+                    context, CatogersView(catogery: catogers[index].text)),
+                child: CatogeryItem(
+                  catogery: catogers[index],
+                ),
               ),
             );
           }),

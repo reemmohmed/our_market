@@ -13,7 +13,9 @@ class HomeCubit extends Cubit<HomeState> {
   final ApiServes _apiServes = ApiServes();
   List<ProductModel> products = [];
   List<ProductModel> saechResult = [];
-  Future<void> getProduct({String? query}) async {
+  List<ProductModel> catogeres = [];
+
+  Future<void> getProduct({String? query, String? catogery}) async {
     emit(GetDataLoading());
     try {
       Response respose = await _apiServes.getdata(
@@ -23,6 +25,7 @@ class HomeCubit extends Cubit<HomeState> {
       }
 
       searchproduct(query);
+      getCatogery(catogery);
       // log(respose.data.toString());
       if (!isClosed) {
         // التأكد من أن الـ Cubit ل
@@ -44,6 +47,19 @@ class HomeCubit extends Cubit<HomeState> {
       for (var product in products) {
         if (product.productName!.toLowerCase().contains(query.toLowerCase())) {
           saechResult.add(product);
+        }
+      }
+    }
+  }
+
+  void getCatogery(String? catogery) {
+    for (var product in products) {
+      print("product category: '${product.catogery}'");
+    }
+    if (catogery != null) {
+      for (var product in products) {
+        if (product.catogery!.trim().toLowerCase() == catogery.toLowerCase()) {
+          catogeres.add(product);
         }
       }
     }
