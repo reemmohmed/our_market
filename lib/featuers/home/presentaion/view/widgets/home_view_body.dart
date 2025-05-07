@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:our_market/core/widgets/text_app_shammer.dart';
 import 'package:our_market/featuers/home/presentaion/view/widgets/all_product_list.dart';
 import 'package:our_market/featuers/home/presentaion/view/widgets/catogery_list.dart';
-import 'package:our_market/featuers/home/presentaion/view/widgets/recentrey_product.dart';
+import 'package:our_market/featuers/home/presentaion/view/widgets/all_product.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});

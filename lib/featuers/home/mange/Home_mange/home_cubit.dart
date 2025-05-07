@@ -25,7 +25,8 @@ class HomeCubit extends Cubit<HomeState> {
       searchproduct(query);
       // log(respose.data.toString());
       if (!isClosed) {
-        // التأكد من أن الـ Cubit لم يغلق بعد
+        // التأكد من أن الـ Cubit ل
+        //م يغلق بعد
         emit(GetDataSuccess());
       }
     } catch (e) {
@@ -37,7 +38,7 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  // saerch for product in the list
+  // saerch for product in the list// search  is any word in the product name
   void searchproduct(String? query) {
     if (query != null) {
       for (var product in products) {

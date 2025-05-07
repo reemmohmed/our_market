@@ -6,6 +6,7 @@ import 'package:our_market/core/them/Styels.dart';
 import 'package:our_market/core/them/cubit/them_cubit_cubit.dart';
 import 'package:our_market/featuers/auth/presentaion/manger/cubit/authentication_cubit.dart';
 import 'package:our_market/featuers/auth/presentaion/view/logen_view.dart';
+import 'package:our_market/featuers/home/mange/Home_mange/home_cubit.dart';
 import 'package:our_market/featuers/nave_bar/presentation/view/navebar.dart';
 import 'package:our_market/test/runtest.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';

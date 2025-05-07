@@ -111,7 +111,8 @@ class RatesCubit extends Cubit<RatesState> {
       // await apiServes.postdata(path, data);
       // await getRates(productId: productId);
       String path = "comments_table";
-      apiServes.postdata(path, data);
+
+      await apiServes.postdata(path, data);
       log("add Cooments = >  ${data.toString()}");
 
       emit(AddCoomentSuccess());
