@@ -16,3 +16,9 @@ final class AddToFavourtesLoading extends HomeState {}
 final class AddToFavourtesSuccess extends HomeState {}
 
 final class AddToFavourtesError extends HomeState {}
+
+final class RemoveFromFavourtesLoading extends HomeState {}
+
+final class RemoveFromFavourtesSuccess extends HomeState {}
+
+final class RemoveFromFavourtesError extends HomeState {}

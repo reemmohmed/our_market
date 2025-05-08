@@ -97,4 +97,22 @@ class HomeCubit extends Cubit<HomeState> {
   bool checkIsFavorite(String productId) {
     return favoriteProducts.containsKey(productId);
   }
+
+  // check if the product is favourite or not
+  // function removeFavorite
+  Future<void> removeFromFavourites(String productId) async {
+    emit(RemoveFromFavourtesLoading());
+    try {
+      String path =
+          "favourtes_product?for_productid=eq.$productId&for_userid=eq.$userId";
+      Response dataFavourites = await _apiServes.deletedata(path);
+
+      log("dataFavourites: ${dataFavourites.data}");
+      favoriteProducts.removeWhere((key, value) => key == productId);
+      emit(RemoveFromFavourtesSuccess());
+    } catch (e) {
+      log(e.toString());
+      emit(RemoveFromFavourtesError());
+    }
+  }
 }

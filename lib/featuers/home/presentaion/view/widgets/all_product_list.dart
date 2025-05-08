@@ -46,8 +46,14 @@ class AllProductList extends StatelessWidget {
                           isFavourite: homeCubit
                               .checkIsFavorite(products[index].productId!),
                           onPressed: () {
-                            homeCubit
-                                .addToFavourtes(products[index].productId!);
+                            bool isfavourtes = homeCubit
+                                .checkIsFavorite(products[index].productId!);
+
+                            isfavourtes
+                                ? homeCubit.removeFromFavourites(
+                                    products[index].productId!)
+                                : homeCubit
+                                    .addToFavourtes(products[index].productId!);
                           },
                           product: products[index]);
                     },
