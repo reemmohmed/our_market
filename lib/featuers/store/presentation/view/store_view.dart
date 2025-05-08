@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:our_market/core/componant/custom_app_bar.dart';
 import 'package:our_market/core/function/navigator_push.dart';
+import 'package:our_market/featuers/home/mange/Home_mange/home_cubit.dart';
 import 'package:our_market/featuers/home/presentaion/view/widgets/all_product_list.dart';
 import 'package:our_market/featuers/search/presentation/view/search_view.dart';
 import 'package:our_market/featuers/store/presentation/view/widgets/store_view_body.dart';
@@ -22,27 +24,29 @@ class _StoreViewState extends State<StoreView> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
-          child: CustomAppbar(
-            controller: _seachController,
-            onPressed: () {
-              if (_seachController.text.isNotEmpty) {
-                navigatorTo(
+    return BlocProvider(
+      create: (context) => HomeCubit()..getProduct(), // ← إنشاء HomeCubit
+      child: SafeArea(
+        child: Scaffold(
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(60),
+            child: CustomAppbar(
+              controller: _seachController,
+              onPressed: () {
+                if (_seachController.text.isNotEmpty) {
+                  navigatorTo(
                     context,
-                    SearchView(
-                      query: _seachController.text,
-                    ));
-              }
-            },
+                    SearchView(query: _seachController.text),
+                  );
+                }
+              },
+            ),
           ),
+          body: const AllProductList(), // ← دي تقدر توصل لـ HomeCubit دلوقتي
         ),
-        body: const AllProductList(),
-        // body: const StoreViewBody(),
       ),
     );
   }
 }
 // AllProductList  you need this it is important
+// body: const StoreViewBody(),
