@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:our_market/core/const/app_asset.dart';
 import 'package:our_market/core/widgets/titel_text_widget.dart';
 import 'package:our_market/featuers/auth/presentaion/view/widget/custom_elevated_button.dart';
 import 'package:our_market/featuers/home/mange/Home_mange/home_cubit.dart';
@@ -27,6 +28,10 @@ class CatogersView extends StatelessWidget {
           child: BlocProvider(
             create: (context) => HomeCubit()..getProduct(catogery: catogery),
             child: AllProductList(
+              message1Titel: "No Items Available",
+              message2subtitel:
+                  "There are currently no products in this category",
+              emptyImagePath: AppAsset.nodata,
               catogery: catogery,
             ),
           ),

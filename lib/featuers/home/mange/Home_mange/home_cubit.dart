@@ -110,6 +110,10 @@ class HomeCubit extends Cubit<HomeState> {
 
       log("dataFavourites: ${dataFavourites.data}");
       favoriteProducts.removeWhere((key, value) => key == productId);
+// remove the product from the list
+      favouritProductList
+          .removeWhere((product) => product.productId == productId);
+
       emit(RemoveFromFavourtesSuccess());
     } catch (e) {
       log(e.toString());
@@ -117,6 +121,7 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
+// check if the product is favourite or not
   List<ProductModel> favouritProductList = [];
   void getFavourteProduct() {
     for (ProductModel product in products) {
@@ -131,5 +136,28 @@ class HomeCubit extends Cubit<HomeState> {
       }
     }
     log(favouritProductList.toString());
+  }
+
+  // clear all the favourite products
+  Future<void> clearAllFavourites() async {
+    emit(RemoveFromFavourtesLoading());
+
+    try {
+      final List<String> productIdsToRemove =
+          favouritProductList.map((product) => product.productId!).toList();
+
+      for (String productId in productIdsToRemove) {
+        String path =
+            "favourtes_product?for_productid=eq.$productId&for_userid=eq.$userId";
+        await _apiServes.deletedata(path);
+        favoriteProducts.remove(productId);
+      }
+
+      favouritProductList.clear();
+      emit(RemoveFromFavourtesSuccess());
+    } catch (e) {
+      log(e.toString());
+      emit(RemoveFromFavourtesError());
+    }
   }
 }

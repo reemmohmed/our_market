@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:our_market/core/widgets/circle_loading.dart';
+import 'package:our_market/core/widgets/subtitel_text_widget.dart';
+import 'package:our_market/core/widgets/titel_text_widget.dart';
 import 'package:our_market/featuers/home/data/product_model.dart';
 import 'package:our_market/featuers/home/mange/Home_mange/home_cubit.dart';
 import 'package:our_market/featuers/home/presentaion/view/widgets/all_product.dart';
@@ -11,10 +13,18 @@ class AllProductList extends StatelessWidget {
     super.key,
     this.query,
     this.catogery,
+    this.isfavouritView = false,
+    required this.emptyImagePath,
+    required this.message1Titel,
+    required this.message2subtitel,
   });
 
   final String? query;
   final String? catogery;
+  final bool isfavouritView;
+  final String emptyImagePath;
+  final String message1Titel;
+  final String message2subtitel;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +39,8 @@ class AllProductList extends StatelessWidget {
           products = homeCubit.saechResult;
         } else if (catogery != null) {
           products = homeCubit.catogeres;
+        } else if (isfavouritView) {
+          products = homeCubit.favouritProductList;
         } else {
           products = homeCubit.products;
         }
@@ -36,7 +48,10 @@ class AllProductList extends StatelessWidget {
         return state is GetDataLoading
             ? const CircleLoading()
             : products.isEmpty
-                ? const Center(child: Text("No products found"))
+                ? CustomIsEmpity(
+                    message1Titel: message1Titel,
+                    message2subtitel: message2subtitel,
+                    emptyImagePath: emptyImagePath)
                 : ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
@@ -63,51 +78,45 @@ class AllProductList extends StatelessWidget {
   }
 }
 
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:our_market/core/widgets/circle_loading.dart';
-// import 'package:our_market/featuers/home/data/product_model.dart';
-// import 'package:our_market/featuers/home/mange/Home_mange/home_cubit.dart';
-// import 'package:our_market/featuers/home/presentaion/view/widgets/all_product.dart';
-// class AllProductList extends StatelessWidget {
-//   const AllProductList({
-//     super.key,
-//     this.query,
-//     this.catogery,
-//   });
+class CustomIsEmpity extends StatelessWidget {
+  const CustomIsEmpity({
+    super.key,
+    required this.emptyImagePath,
+    required this.message1Titel,
+    required this.message2subtitel,
+  });
 
-//   final String? query;
-//   final String? catogery;
+  final String emptyImagePath;
+  final String message1Titel;
+  final String message2subtitel;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocBuilder<HomeCubit, HomeState>(
-//       builder: (context, state) {
-//         final homeCubit = context.read<HomeCubit>();
+  @override
+  Widget build(BuildContext context) {
+    final siz = MediaQuery.of(context).size;
 
-//         if (query != null) {
-//           homeCubit.searchproduct(query);
-//         }
-
-//         final products = query != null
-//             ? homeCubit.saechResult
-//             : catogery != null
-//                 ? homeCubit.getCatogery(catogery)
-//                 : homeCubit.products;
-
-//         return state is GetDataLoading
-//             ? const Center(child: CircleLoading())
-//             : ListView.builder(
-//                 physics: const NeverScrollableScrollPhysics(),
-//                 shrinkWrap: true,
-//                 itemCount: products.length,
-//                 itemBuilder: (context, index) {
-//                   return AllProduct(
-//                     product: products[index],
-//                   );
-//                 },
-//               );
-//       },
-//     );
-//   }
-// }
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image.asset(
+            emptyImagePath,
+            width: siz.width * 3 / 3,
+            height: siz.width * 3 / 3,
+          ),
+          const SizedBox(height: 16),
+          TitelTextWidget(
+            text: message1Titel,
+            //  "Ups!... no results found",
+          ),
+          const SizedBox(height: 16),
+          SubtitelTextWidget(
+            text: message2subtitel,
+            //  "Please try another Search",
+            //  "Please try another Search"
+          ),
+        ],
+      ),
+    );
+  }
+}

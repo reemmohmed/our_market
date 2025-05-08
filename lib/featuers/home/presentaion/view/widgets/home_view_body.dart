@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:our_market/core/const/app_asset.dart';
 import 'package:our_market/core/widgets/text_app_shammer.dart';
 import 'package:our_market/featuers/home/presentaion/view/widgets/all_product_list.dart';
 import 'package:our_market/featuers/home/presentaion/view/widgets/catogery_list.dart';
@@ -21,7 +22,11 @@ class HomeViewBody extends StatelessWidget {
           const SizedBox(
             height: 7.5,
           ),
-          AllProductList()
+          AllProductList(
+            message1Titel: "No Items Available",
+            message2subtitel: "There are currently no products in this categor",
+            emptyImagePath: AppAsset.nodata,
+          )
         ],
       ),
     );

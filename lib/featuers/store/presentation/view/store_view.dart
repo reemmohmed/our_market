@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:our_market/core/componant/custom_app_bar.dart';
+import 'package:our_market/core/const/app_asset.dart';
 import 'package:our_market/core/function/navigator_push.dart';
 import 'package:our_market/featuers/home/mange/Home_mange/home_cubit.dart';
 import 'package:our_market/featuers/home/presentaion/view/widgets/all_product_list.dart';
@@ -42,7 +43,18 @@ class _StoreViewState extends State<StoreView> {
               },
             ),
           ),
-          body: const AllProductList(), // ← دي تقدر توصل لـ HomeCubit دلوقتي
+          body: const SingleChildScrollView(
+            child: Column(
+              children: [
+                const AllProductList(
+                  message1Titel: "No Items Available",
+                  message2subtitel:
+                      "There are currently no products in this categor",
+                  emptyImagePath: AppAsset.nodata,
+                ),
+              ],
+            ),
+          ), // ← دي تقدر توصل لـ HomeCubit دلوقتي
         ),
       ),
     );

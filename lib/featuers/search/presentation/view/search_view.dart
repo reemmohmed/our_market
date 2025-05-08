@@ -65,6 +65,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:our_market/core/componant/custom_app_bar.dart';
+import 'package:our_market/core/const/app_asset.dart';
 import 'package:our_market/core/widgets/titel_text_widget.dart';
 import 'package:our_market/featuers/auth/presentaion/view/widget/custom_elevated_button.dart';
 import 'package:our_market/featuers/home/mange/Home_mange/home_cubit.dart';
@@ -90,7 +91,11 @@ class SearchView extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: AllProductList(query: query),
+          child: AllProductList(
+              message1Titel: "Ups!... no results found",
+              message2subtitel: "Please try another Search",
+              emptyImagePath: AppAsset.empitySearch,
+              query: query),
         ),
       ),
     );

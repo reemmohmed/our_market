@@ -18,10 +18,15 @@ class AllProduct extends StatelessWidget {
   final ProductModel product;
   final void Function()? onPressed;
   final bool isFavourite;
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+
+    double textScale =
+        screenWidth / 375; // حجم نص مناسب لأحجام الشاشات المختلفة
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
@@ -37,40 +42,37 @@ class AllProduct extends StatelessWidget {
             children: [
               Stack(
                 children: [
-                  ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(12),
-                      bottomRight: Radius.circular(12),
-                      bottomLeft: Radius.circular(12),
-                    ),
+                  AspectRatio(
+                    aspectRatio: 8 / 4, // جعل الصورة مرنة بحسب العرض
                     child: ShimmerImage(
                       imageUrl: product.imageUrl ??
                           "https://ichef.bbci.co.uk/news/1024/cpsprodpb/14235/production/_100058428_mediaitem100058424.jpg.webp",
+//                    ",
                     ),
                   ),
                   Positioned(
-                      child: Container(
-                    alignment: Alignment.center,
-                    height: 44,
-                    width: 88,
-                    decoration: const BoxDecoration(
-                      color: AppColors.kprimaryColoblue,
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(12),
-                        bottomRight: Radius.circular(12),
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 44,
+                      width: 88,
+                      decoration: const BoxDecoration(
+                        color: AppColors.kprimaryColoblue,
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(12),
+                          bottomRight: Radius.circular(12),
+                        ),
+                      ),
+                      child: SubtitelTextWidget(
+                        text: "${product.sale} OFF",
+                        fontSize: 20 *
+                            textScale, // تعديل حجم النص بناءً على حجم الشاشة
+                        color: Colors.white,
                       ),
                     ),
-                    child: SubtitelTextWidget(
-                      text: "${product.sale} OFF",
-                      fontSize: 20,
-                      color: Colors.white,
-                    ),
-                  ))
+                  )
                 ],
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -80,7 +82,7 @@ class AllProduct extends StatelessWidget {
                       children: [
                         TitelTextWidget(
                           text: product.productName ?? "",
-                          fontSize: 25,
+                          fontSize: 25 * textScale, // تعديل حجم النص
                         ),
                         IconButton(
                           onPressed: onPressed,
@@ -88,7 +90,7 @@ class AllProduct extends StatelessWidget {
                             isFavourite
                                 ? Ionicons.heart
                                 : Ionicons.heart_outline,
-                            size: 30,
+                            size: 30 * textScale, // تعديل حجم الأيقونة
                             color: isFavourite
                                 ? AppColors.ksignUp
                                 : Theme.of(context).colorScheme.onSurface,
@@ -96,9 +98,7 @@ class AllProduct extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
+                    const SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -107,11 +107,11 @@ class AllProduct extends StatelessWidget {
                             SubtitelTextWidget(
                               text: "${product.price}",
                               fontWeight: FontWeight.bold,
-                              fontSize: 25,
+                              fontSize: 25 * textScale, // تعديل حجم النص
                             ),
                             SubtitelTextWidget(
                               text: product.oldPrice ?? "",
-                              fontSize: 20,
+                              fontSize: 20 * textScale, // تعديل حجم النص
                               decoration: TextDecoration.lineThrough,
                               color: Colors.grey,
                             ),
@@ -129,10 +129,10 @@ class AllProduct extends StatelessWidget {
                           ),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -140,3 +140,139 @@ class AllProduct extends StatelessWidget {
     );
   }
 }
+
+
+
+// class AllProduct extends StatelessWidget {
+//   const AllProduct({
+//     super.key,
+//     required this.product,
+//     this.onPressed,
+//     required this.isFavourite,
+//   });
+//   final ProductModel product;
+//   final void Function()? onPressed;
+//   final bool isFavourite;
+//   @override
+//   Widget build(BuildContext context) {
+//     final screenWidth = MediaQuery.of(context).size.width;
+//     final screenHeight = MediaQuery.of(context).size.height;
+//     return Padding(
+//       padding: const EdgeInsets.all(8.0),
+//       child: GestureDetector(
+//         onTap: () => navigatorTo(
+//           context,
+//           ProductDetalseView(
+//             product: product,
+//           ),
+//         ),
+//         child: Card(
+//           child: Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             children: [
+//               Stack(
+//                 children: [
+//                   ClipRRect(
+//                     borderRadius: const BorderRadius.only(
+//                       topRight: Radius.circular(12),
+//                       bottomRight: Radius.circular(12),
+//                       bottomLeft: Radius.circular(12),
+//                     ),
+//                     child: ShimmerImage(
+//                       imageUrl: product.imageUrl ??
+//                           "https://ichef.bbci.co.uk/news/1024/cpsprodpb/14235/production/_100058428_mediaitem100058424.jpg.webp",
+//                     ),
+//                   ),
+//                   Positioned(
+//                       child: Container(
+//                     alignment: Alignment.center,
+//                     height: 44,
+//                     width: 88,
+//                     decoration: const BoxDecoration(
+//                       color: AppColors.kprimaryColoblue,
+//                       borderRadius: BorderRadius.only(
+//                         topRight: Radius.circular(12),
+//                         bottomRight: Radius.circular(12),
+//                       ),
+//                     ),
+//                     child: SubtitelTextWidget(
+//                       text: "${product.sale} OFF",
+//                       fontSize: 20,
+//                       color: Colors.white,
+//                     ),
+//                   ))
+//                 ],
+//               ),
+//               const SizedBox(
+//                 height: 10,
+//               ),
+//               Padding(
+//                 padding: const EdgeInsets.all(8.0),
+//                 child: Column(
+//                   children: [
+//                     Row(
+//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                       children: [
+//                         TitelTextWidget(
+//                           text: product.productName ?? "",
+//                           fontSize: 25,
+//                         ),
+//                         IconButton(
+//                           onPressed: onPressed,
+//                           icon: Icon(
+//                             isFavourite
+//                                 ? Ionicons.heart
+//                                 : Ionicons.heart_outline,
+//                             size: 30,
+//                             color: isFavourite
+//                                 ? AppColors.ksignUp
+//                                 : Theme.of(context).colorScheme.onSurface,
+//                           ),
+//                         ),
+//                       ],
+//                     ),
+//                     const SizedBox(
+//                       height: 10,
+//                     ),
+//                     Row(
+//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                       children: [
+//                         Column(
+//                           children: [
+//                             SubtitelTextWidget(
+//                               text: "${product.price}",
+//                               fontWeight: FontWeight.bold,
+//                               fontSize: 25,
+//                             ),
+//                             SubtitelTextWidget(
+//                               text: product.oldPrice ?? "",
+//                               fontSize: 20,
+//                               decoration: TextDecoration.lineThrough,
+//                               color: Colors.grey,
+//                             ),
+//                           ],
+//                         ),
+//                         ElevatedButton(
+//                           style: ElevatedButton.styleFrom(
+//                             backgroundColor: AppColors.kblue,
+//                             elevation: 2,
+//                           ),
+//                           onPressed: () {},
+//                           child: TitelTextWidget(
+//                             text: "Buy Now",
+//                             color: Theme.of(context).cardColor,
+//                           ),
+//                         ),
+//                       ],
+//                     )
+//                   ],
+//                 ),
+//               )
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
