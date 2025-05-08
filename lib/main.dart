@@ -1,4 +1,3 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -9,6 +8,7 @@ import 'package:our_market/featuers/auth/presentaion/manger/cubit/authentication
 import 'package:our_market/featuers/auth/presentaion/view/logen_view.dart';
 import 'package:our_market/featuers/home/mange/Home_mange/home_cubit.dart';
 import 'package:our_market/featuers/nave_bar/presentation/view/navebar.dart';
+import 'package:our_market/test/runtest.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
@@ -21,12 +21,7 @@ void main() async {
   );
 
   Bloc.observer = MyObserver();
-  runApp(
-    DevicePreview(
-      enabled: true, // قم بتفعيل المعاينة إذا كنت في بيئة التطوير
-      builder: (context) => const OurMarket(), // استبدل بـ اسم تطبيقك الرئيسي
-    ),
-  );
+  runApp(const OurMarket());
 }
 
 class OurMarket extends StatelessWidget {
