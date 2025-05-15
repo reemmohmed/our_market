@@ -32,6 +32,7 @@ migrate_working_dir/
 .pub/
 /build/
 lib/core/AppServer/key_api_sabapase.dart
+lib/core/AppServer/paymop_key.dart
 
 
 # Symbolication related

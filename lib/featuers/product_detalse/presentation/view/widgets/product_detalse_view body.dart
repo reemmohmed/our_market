@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:our_market/core/AppServer/key_api_sabapase.dart';
+import 'package:our_market/core/AppServer/paymop_key.dart';
 import 'package:our_market/core/function/navigate_without_back.dart';
 import 'package:our_market/core/widgets/circle_loading.dart';
 import 'package:our_market/core/widgets/titel_text_widget.dart';
@@ -19,6 +23,7 @@ import 'package:our_market/featuers/product_detalse/presentation/view/widgets/co
 
 import 'package:our_market/featuers/product_detalse/presentation/view/widgets/product_dots_indecator.dart';
 import 'package:our_market/featuers/product_detalse/presentation/view/widgets/product_image_saroursel.dart';
+import 'package:pay_with_paymob/pay_with_paymob.dart';
 
 import 'componantsview/custom_rating.dart';
 
@@ -35,6 +40,40 @@ class ProductDetailBody extends StatefulWidget {
 
 class _ProductDetailBodyState extends State<ProductDetailBody> {
   final TextEditingController _commsentController = TextEditingController();
+  @override
+  void initState() {
+    PaymentData.initialize(
+      apiKey:
+          apiKeypaymop, // Required: Found under Dashboard -> Settings -> Account Info -> API Key
+      iframeId: iframeIdpaymop, // Required: Found under Developers -> iframes
+      integrationCardId:
+          integrationCardId, // Required: Found under Developers -> Payment Integrations -> Online Card ID
+      integrationMobileWalletId:
+          integrationMobileWalletId, // Required: Found under Developers -> Payment Integrations -> Mobile Wallet ID
+
+      // Optional User Data
+      // userData: UserData(
+      //   email: "User Email", // Optional: Defaults to 'NA'
+      //   phone: "User Phone", // Optional: Defaults to 'NA'
+      //   name: "User First Name", // Optional: Defaults to 'NA'
+      //   lastName: "User Last Name", // Optional: Defaults to 'NA'
+      // ),
+
+      // // Optional Style Customizations
+      // style: Style(
+      //   primaryColor: Colors.blue, // Default: Colors.blue
+      //   scaffoldColor: Colors.white, // Default: Colors.white
+      //   appBarBackgroundColor: Colors.blue, // Default: Colors.blue
+      //   appBarForegroundColor: Colors.white, // Default: Colors.white
+      //   textStyle: TextStyle(), // Default: TextStyle()
+      //   buttonStyle: ElevatedButton.styleFrom(), // Default: ElevatedButton.styleFrom()
+      //   circleProgressColor: Colors.blue, // Default: Colors.blue
+      //   unselectedColor: Colors.grey, // Default: Colors.grey
+      // ),
+    );
+    super.initState();
+  }
+
   @override
   void dispose() {
     _commsentController.dispose();
@@ -101,7 +140,28 @@ class _ProductDetailBodyState extends State<ProductDetailBody> {
                         const SizedBox(
                           height: 12,
                         ),
-                        const CustomButtomBuy(),
+                        CustomButtomBuy(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PaymentView(
+                                  onPaymentSuccess: () {
+                                    log("Payment Success");
+                                    // Handle payment success
+                                  },
+                                  onPaymentError: () {
+                                    log("Payment Error");
+                                    // Handle payment error
+                                  },
+                                  price: double.parse(widget.product
+                                      .price!), // Required: Total price (e.g., 100 for 100 EGP)
+                                ),
+                              ),
+                            );
+                            // navigatorTo(context, const MyCartView());
+                          },
+                        ),
                         const SizedBox(
                           height: 16,
                         ),
