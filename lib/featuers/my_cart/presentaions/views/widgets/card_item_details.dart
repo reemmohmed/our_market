@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:our_market/core/widgets/app_colors.dart';
 import 'package:our_market/core/widgets/subtitel_text_widget.dart';
 import 'package:our_market/core/widgets/titel_text_widget.dart';
+import 'package:our_market/featuers/home/data/product_model.dart';
 import 'package:our_market/featuers/my_cart/presentaions/views/widgets/cart_item_action.dart';
 
 class CardItemDetalis extends StatelessWidget {
-  const CardItemDetalis({super.key});
-
+  const CardItemDetalis({super.key, required this.product});
+  final ProductModel product;
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const TitelTextWidget(
-          text: "Product Title",
+        TitelTextWidget(
+          text: product.productName ?? "Product Title",
         ),
         const SizedBox(height: 4),
         const SubtitelTextWidget(

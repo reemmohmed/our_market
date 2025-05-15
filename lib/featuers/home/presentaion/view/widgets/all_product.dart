@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:our_market/core/componant/shimmer_iamge.dart';
@@ -8,8 +6,9 @@ import 'package:our_market/core/widgets/app_colors.dart';
 import 'package:our_market/core/widgets/subtitel_text_widget.dart';
 import 'package:our_market/core/widgets/titel_text_widget.dart';
 import 'package:our_market/featuers/home/data/product_model.dart';
+import 'package:our_market/featuers/nave_bar/manger/cubit/nave_bar_cubit_cubit.dart';
 import 'package:our_market/featuers/product_detalse/presentation/view/product_detalse_view.dart';
-import 'package:pay_with_paymob/pay_with_paymob.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AllProduct extends StatelessWidget {
   const AllProduct({
@@ -127,23 +126,26 @@ class AllProduct extends StatelessWidget {
                             elevation: 2,
                           ),
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PaymentView(
-                                  onPaymentSuccess: () {
-                                    log("Payment Success");
-                                    // Handle payment success
-                                  },
-                                  onPaymentError: () {
-                                    log("Payment Error");
-                                    // Handle payment error
-                                  },
-                                  price: double.parse(product
-                                      .price!), // Required: Total price (e.g., 100 for 100 EGP)
-                                ),
-                              ),
-                            );
+                            context
+                                .read<NaveBarCubitCubit>()
+                                .changcurrentPage(3);
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) => PaymentView(
+                            //       onPaymentSuccess: () {
+                            //         log("Payment Success");
+                            //         // Handle payment success
+                            //       },
+                            //       onPaymentError: () {
+                            //         log("Payment Error");
+                            //         // Handle payment error
+                            //       },
+                            //       price: double.parse(product
+                            //           .price!), // Required: Total price (e.g., 100 for 100 EGP)
+                            //     ),
+                            //   ),
+                            // );
                           },
                           child: TitelTextWidget(
                             text: "Buy Now",

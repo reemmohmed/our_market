@@ -12,6 +12,7 @@ import 'package:our_market/featuers/store/presentation/view/store_view.dart';
 
 class NaveBar extends StatelessWidget {
   const NaveBar({super.key});
+
   final List<Widget> pageView = const [
     HomeView(),
     StoreView(),

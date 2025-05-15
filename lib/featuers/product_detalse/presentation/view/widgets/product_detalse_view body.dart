@@ -39,9 +39,12 @@ class ProductDetailBody extends StatefulWidget {
 }
 
 class _ProductDetailBodyState extends State<ProductDetailBody> {
+  late AuthenticationCubit authCubit;
+
   final TextEditingController _commsentController = TextEditingController();
   @override
   void initState() {
+    authCubit = context.read<AuthenticationCubit>();
     PaymentData.initialize(
       apiKey:
           apiKeypaymop, // Required: Found under Dashboard -> Settings -> Account Info -> API Key
@@ -52,12 +55,12 @@ class _ProductDetailBodyState extends State<ProductDetailBody> {
           integrationMobileWalletId, // Required: Found under Developers -> Payment Integrations -> Mobile Wallet ID
 
       // Optional User Data
-      // userData: UserData(
-      //   email: "User Email", // Optional: Defaults to 'NA'
-      //   phone: "User Phone", // Optional: Defaults to 'NA'
-      //   name: "User First Name", // Optional: Defaults to 'NA'
-      //   lastName: "User Last Name", // Optional: Defaults to 'NA'
-      // ),
+      userData: UserData(
+        email: authCubit.userData!.email, // Optional: Defaults to 'NA'
+        // phone: "User Phone", // Optional: Defaults to 'NA'
+        name: authCubit.userData!.name, // Optional: Defaults to 'NA'
+        // lastName: "User Last Name", // Optional: Defaults to 'NA'
+      ),
 
       // // Optional Style Customizations
       // style: Style(
