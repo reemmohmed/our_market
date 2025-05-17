@@ -12,6 +12,7 @@ import 'package:our_market/featuers/auth/presentaion/manger/cubit/authentication
 import 'package:our_market/featuers/auth/presentaion/view/widget/custom_elevated_button.dart';
 import 'package:our_market/featuers/auth/presentaion/view/widget/custom_tet_form.dart';
 import 'package:our_market/featuers/home/data/product_model.dart';
+import 'package:our_market/featuers/home/mange/Home_mange/home_cubit.dart';
 import 'package:our_market/featuers/product_detalse/mange/DotesImage/dotes_image_cubit.dart';
 import 'package:our_market/featuers/product_detalse/mange/rates/rates_cubit.dart';
 import 'package:our_market/featuers/product_detalse/presentation/view/product_detalse_view.dart';
@@ -33,6 +34,7 @@ class ProductDetailBody extends StatefulWidget {
     required this.product,
   });
   final ProductModel product;
+  // final void Function() onPaymentSuccess;
 
   @override
   State<ProductDetailBody> createState() => _ProductDetailBodyState();
@@ -44,7 +46,7 @@ class _ProductDetailBodyState extends State<ProductDetailBody> {
   final TextEditingController _commsentController = TextEditingController();
   @override
   void initState() {
-    authCubit = context.read<AuthenticationCubit>();
+    // authCubit = context.read<AuthenticationCubit>();
     PaymentData.initialize(
       apiKey:
           apiKeypaymop, // Required: Found under Dashboard -> Settings -> Account Info -> API Key
@@ -55,12 +57,12 @@ class _ProductDetailBodyState extends State<ProductDetailBody> {
           integrationMobileWalletId, // Required: Found under Developers -> Payment Integrations -> Mobile Wallet ID
 
       // Optional User Data
-      userData: UserData(
-        email: authCubit.userData!.email, // Optional: Defaults to 'NA'
-        // phone: "User Phone", // Optional: Defaults to 'NA'
-        name: authCubit.userData!.name, // Optional: Defaults to 'NA'
-        // lastName: "User Last Name", // Optional: Defaults to 'NA'
-      ),
+      // userData: UserData(
+      //   email: authCubit.userData!.email, // Optional: Defaults to 'NA'
+      //   // phone: "User Phone", // Optional: Defaults to 'NA'
+      //   name: authCubit.userData!.name, // Optional: Defaults to 'NA'
+      //   // lastName: "User Last Name", // Optional: Defaults to 'NA'
+      // ),
 
       // // Optional Style Customizations
       // style: Style(
@@ -85,6 +87,7 @@ class _ProductDetailBodyState extends State<ProductDetailBody> {
 
   @override
   Widget build(BuildContext context) {
+    final homeCubit = context.read<HomeCubit>();
     // final List<ProductModel> products = context.read<HomeCubit>().products;
 
     return MultiBlocProvider(
@@ -145,11 +148,14 @@ class _ProductDetailBodyState extends State<ProductDetailBody> {
                         ),
                         CustomButtomBuy(
                           onPressed: () {
+                            final homeCubit = context.read<HomeCubit>();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => PaymentView(
                                   onPaymentSuccess: () {
+                                    homeCubit.buyproduct(
+                                        productId: widget.product.productId!);
                                     log("Payment Success");
                                     // Handle payment success
                                   },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:our_market/core/function/show_mes.dart';
 import 'package:our_market/core/widgets/circle_loading.dart';
 import 'package:our_market/core/widgets/subtitel_text_widget.dart';
 import 'package:our_market/core/widgets/titel_text_widget.dart';
@@ -31,7 +32,11 @@ class AllProductList extends StatelessWidget {
     final homeCubit = context.read<HomeCubit>();
 
     return BlocConsumer<HomeCubit, HomeState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is BuyProductSuccess) {
+          showMassegeScaffold(context, "payment is Sussful");
+        }
+      },
       builder: (context, state) {
         List<ProductModel> products;
 
@@ -58,6 +63,10 @@ class AllProductList extends StatelessWidget {
                     itemCount: products.length,
                     itemBuilder: (context, index) {
                       return AllProduct(
+                          onPaymentSuccess: () {
+                            homeCubit.buyproduct(
+                                productId: products[index].productId!);
+                          },
                           isFavourite: homeCubit
                               .checkIsFavorite(products[index].productId!),
                           onPressed: () {

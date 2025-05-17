@@ -160,4 +160,18 @@ class HomeCubit extends Cubit<HomeState> {
       emit(RemoveFromFavourtesError());
     }
   }
+
+  Future<void> buyproduct({required String productId}) async {
+    emit(BuyProductLoding());
+    try {
+      String path = "pruches_table";
+      Response buy = await _apiServes.postdata(path,
+          {"is_bought": true, "for_user": userId, "for_product": productId});
+
+      emit(BuyProductSuccess());
+    } catch (e) {
+      log(e.toString());
+      emit(BuyProductError());
+    }
+  }
 }
