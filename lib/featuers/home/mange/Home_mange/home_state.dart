@@ -28,3 +28,9 @@ final class BuyProductLoding extends HomeState {}
 final class BuyProductSuccess extends HomeState {}
 
 final class BuyProductError extends HomeState {}
+
+final class RemoveOrderLoading extends HomeState {}
+
+final class RemoveOrderSuccess extends HomeState {}
+
+final class RemoveOrderError extends HomeState {}

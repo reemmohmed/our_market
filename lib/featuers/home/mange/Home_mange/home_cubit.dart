@@ -6,6 +6,7 @@ import 'package:meta/meta.dart';
 import 'package:our_market/core/AppServer/api_serves.dart';
 import 'package:our_market/featuers/home/data/favourtes_product.dart';
 import 'package:our_market/featuers/home/data/product_model.dart';
+import 'package:our_market/featuers/home/data/pruches_table.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -30,6 +31,7 @@ class HomeCubit extends Cubit<HomeState> {
       getFavourteProduct();
       searchproduct(query);
       getCatogery(catogery);
+      getUserOrderProduct();
       // log(respose.data.toString());
       if (!isClosed) {
         // التأكد من أن الـ Cubit ل
@@ -172,6 +174,41 @@ class HomeCubit extends Cubit<HomeState> {
     } catch (e) {
       log(e.toString());
       emit(BuyProductError());
+    }
+  }
+
+// get userSorder
+  List<ProductModel> usersOrders = [];
+  void getUserOrderProduct() {
+    for (ProductModel product in products) {
+      if (product.pruchesTable != null && product.pruchesTable!.isNotEmpty) {
+        for (PruchesTable usersOrder in product.pruchesTable!) {
+          if (usersOrder.forUser == userId) {
+            usersOrders.add(product);
+          }
+        }
+      }
+    }
+    log(favouritProductList.toString());
+  }
+
+  Future<void> removeOrderFromServer(String productId) async {
+    emit(RemoveOrderLoading()); // أرسل حالة بداية الحذف
+
+    try {
+      final path =
+          "pruches_table?for_product=eq.$productId&for_user=eq.$userId";
+      await _apiServes.deletedata(path);
+
+      // حذف من القائمة المحلية
+      usersOrders.removeWhere((product) => product.productId == productId);
+
+      emit(RemoveOrderSuccess()); // حالة النجاح
+      emit(
+          GetDataSuccess()); // لتحديث الواجهة إن كنت تعتمد على هذه الحالة في الواجهة
+    } catch (e) {
+      log("Error while removing order: $e");
+      emit(RemoveOrderError()); // أرسل حالة الخطأ
     }
   }
 }

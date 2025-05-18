@@ -5,9 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:our_market/core/AppServer/key_api_sabapase.dart';
 import 'package:our_market/core/AppServer/paymop_key.dart';
 import 'package:our_market/core/function/navigate_without_back.dart';
+import 'package:our_market/core/function/show_mes.dart';
 import 'package:our_market/core/widgets/circle_loading.dart';
 import 'package:our_market/core/widgets/titel_text_widget.dart';
-import 'package:our_market/featuers/auth/presentaion/data/user_data_model.dart';
 import 'package:our_market/featuers/auth/presentaion/manger/cubit/authentication_cubit.dart';
 import 'package:our_market/featuers/auth/presentaion/view/widget/custom_elevated_button.dart';
 import 'package:our_market/featuers/auth/presentaion/view/widget/custom_tet_form.dart';
@@ -147,30 +147,67 @@ class _ProductDetailBodyState extends State<ProductDetailBody> {
                           height: 12,
                         ),
                         CustomButtomBuy(
-                          onPressed: () {
-                            final homeCubit = context.read<HomeCubit>();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PaymentView(
-                                  onPaymentSuccess: () {
-                                    homeCubit.buyproduct(
-                                        productId: widget.product.productId!);
-                                    log("Payment Success");
-                                    // Handle payment success
-                                  },
-                                  onPaymentError: () {
-                                    log("Payment Error");
-                                    // Handle payment error
-                                  },
-                                  price: double.parse(widget.product
-                                      .price!), // Required: Total price (e.g., 100 for 100 EGP)
-                                ),
+                            // onPressed: () {
+                            //   final homeCubit = context.read<HomeCubit>();
+                            //   Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) => PaymentView(
+                            //         onPaymentSuccess: () {
+                            //           homeCubit.buyproduct(
+                            //               productId: widget.product.productId!);
+                            //           log("Payment Success");
+                            //           // Handle payment success
+                            //         },
+                            //         onPaymentError: () {
+                            //           log("Payment Error");
+                            //           // Handle payment error
+                            //         },
+                            //         price: double.parse(widget.product
+                            //             .price!), // Required: Total price (e.g., 100 for 100 EGP)
+                            //       ),
+                            //     ),
+                            //   );
+                            //   // navigatorTo(context, const MyCartView());
+                            // },
+
+                            onPressed: () async {
+                          final homeCubit = context.read<HomeCubit>();
+
+                          final result = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PaymentView(
+                                onPaymentSuccess: () async {
+                                  homeCubit.buyproduct(
+                                      productId: widget.product.productId!);
+                                  await homeCubit.getProduct();
+                                  log("Payment Success");
+                                  if (context.mounted) {
+                                    showMassegeScaffold(
+                                        context, "Payment Success");
+                                  }
+                                },
+                                onPaymentError: () {
+                                  log("Payment Error");
+                                  Navigator.pop(
+                                      context, false); // ← أو بدون قيمة
+                                },
+                                price: double.parse(widget.product.price!),
                               ),
-                            );
-                            // navigatorTo(context, const MyCartView());
-                          },
-                        ),
+                            ),
+                          );
+
+                          // 👇 بعد الرجوع، نفذ إعادة تحميل أو أي شيء حسب نجاح العملية
+                          if (result == true) {
+                            homeCubit.getProduct();
+                            // أو أي method تحدث الحالة
+
+                            if (context.mounted) {
+                              showMassegeScaffold(context, "Payment Success");
+                            }
+                          }
+                        }),
                         const SizedBox(
                           height: 16,
                         ),

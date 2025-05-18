@@ -5,8 +5,8 @@ import 'package:our_market/core/widgets/subtitel_text_widget.dart';
 import 'package:our_market/featuers/my_cart/presentaions/views/widgets/custom_icon_my_cart.dart';
 
 class CardItemAction extends StatelessWidget {
-  const CardItemAction({super.key});
-
+  const CardItemAction({super.key, required this.onRemove});
+  final VoidCallback onRemove;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -34,7 +34,7 @@ class CardItemAction extends StatelessWidget {
           icon: const Icon(Icons.delete_outline, color: Colors.red),
           onPressed: () {
             // تأكيد الحذف
-            ShowDialog2(context);
+            ShowDialog2(context, onRemove);
           },
         ),
       ],

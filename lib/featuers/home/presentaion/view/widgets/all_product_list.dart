@@ -18,6 +18,7 @@ class AllProductList extends StatelessWidget {
     required this.emptyImagePath,
     required this.message1Titel,
     required this.message2subtitel,
+    this.isMyOrdersView = false,
   });
 
   final String? query;
@@ -26,6 +27,7 @@ class AllProductList extends StatelessWidget {
   final String emptyImagePath;
   final String message1Titel;
   final String message2subtitel;
+  final bool isMyOrdersView;
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +48,8 @@ class AllProductList extends StatelessWidget {
           products = homeCubit.catogeres;
         } else if (isfavouritView) {
           products = homeCubit.favouritProductList;
+        } else if (isMyOrdersView) {
+          products = homeCubit.usersOrders;
         } else {
           products = homeCubit.products;
         }

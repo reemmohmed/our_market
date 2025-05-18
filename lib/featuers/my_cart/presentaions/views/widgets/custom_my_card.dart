@@ -7,8 +7,11 @@ class CustomMyCart extends StatelessWidget {
   const CustomMyCart({
     super.key,
     required this.product,
+    required this.onRemove,
   });
   final ProductModel product;
+  final VoidCallback onRemove;
+
   @override
   Widget build(BuildContext context) {
     // final screenWidth = MediaQuery.of(context).size.width;
@@ -29,11 +32,12 @@ class CustomMyCart extends StatelessWidget {
               imageUrl: product.imageUrl ??
                   "https://ichef.bbci.co.uk/news/1024/cpsprodpb/14235/production/_100058428_mediaitem100058424.jpg.webp",
             ),
-            SizedBox(width: 12),
+            const SizedBox(width: 12),
 
             // تفاصيل المنتج
             Expanded(
                 child: CardItemDetalis(
+              onRemove: onRemove,
               product: product,
             )),
           ],

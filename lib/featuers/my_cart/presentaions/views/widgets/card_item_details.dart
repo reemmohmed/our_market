@@ -6,8 +6,11 @@ import 'package:our_market/featuers/home/data/product_model.dart';
 import 'package:our_market/featuers/my_cart/presentaions/views/widgets/cart_item_action.dart';
 
 class CardItemDetalis extends StatelessWidget {
-  const CardItemDetalis({super.key, required this.product});
+  const CardItemDetalis(
+      {super.key, required this.product, required this.onRemove});
   final ProductModel product;
+  final VoidCallback onRemove;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -40,7 +43,9 @@ class CardItemDetalis extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 12),
-        CardItemAction()
+        CardItemAction(
+          onRemove: onRemove,
+        )
       ],
     );
   }
