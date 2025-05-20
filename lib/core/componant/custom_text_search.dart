@@ -24,7 +24,7 @@ class CustomTextSeach extends StatelessWidget {
 
       decoration: InputDecoration(
           suffixIcon: GestureDetector(
-              onTap: onTap, child: Icon(Ionicons.search_outline)),
+              onTap: onTap, child: const Icon(Ionicons.search_outline)),
           prefix: GestureDetector(
             onTap: () {
               FocusScope.of(context).unfocus();

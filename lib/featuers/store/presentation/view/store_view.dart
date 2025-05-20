@@ -6,7 +6,6 @@ import 'package:our_market/core/function/navigator_push.dart';
 import 'package:our_market/featuers/home/mange/Home_mange/home_cubit.dart';
 import 'package:our_market/featuers/home/presentaion/view/widgets/all_product_list.dart';
 import 'package:our_market/featuers/search/presentation/view/search_view.dart';
-import 'package:our_market/featuers/store/presentation/view/widgets/store_view_body.dart';
 
 class StoreView extends StatefulWidget {
   const StoreView({super.key});
@@ -46,7 +45,7 @@ class _StoreViewState extends State<StoreView> {
           body: const SingleChildScrollView(
             child: Column(
               children: [
-                const AllProductList(
+                AllProductList(
                   message1Titel: "No Items Available",
                   message2subtitel:
                       "There are currently no products in this categor",

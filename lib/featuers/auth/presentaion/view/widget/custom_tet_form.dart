@@ -32,6 +32,7 @@ class CustomTextForm extends StatelessWidget {
         if (valu == null || valu.isEmpty) {
           return "this failed is requierd";
         }
+        return null;
       },
       keyboardType: keyboardType,
       decoration: InputDecoration(

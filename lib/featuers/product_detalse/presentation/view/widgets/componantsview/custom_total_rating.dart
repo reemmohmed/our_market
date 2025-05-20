@@ -10,14 +10,14 @@ class CustomTotalrating extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Row(
         children: [
           SubtitelTextWidget(
             text: text,
             fontSize: 20,
           ),
-          Icon(
+          const Icon(
             Icons.star_rounded,
             color: Colors.orange,
             size: 29,

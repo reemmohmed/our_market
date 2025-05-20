@@ -6,7 +6,6 @@ import 'package:our_market/core/function/navigator_to_out.dart';
 import 'package:our_market/core/widgets/app_colors.dart';
 import 'package:our_market/core/widgets/circle_loading.dart';
 import 'package:our_market/core/widgets/titel_text_widget.dart';
-import 'package:our_market/featuers/auth/presentaion/data/user_data_model.dart';
 import 'package:our_market/featuers/auth/presentaion/manger/cubit/authentication_cubit.dart';
 import 'package:our_market/featuers/auth/presentaion/view/logen_view.dart';
 import 'package:our_market/featuers/my_cart/presentaions/views/my_cart_view.dart';

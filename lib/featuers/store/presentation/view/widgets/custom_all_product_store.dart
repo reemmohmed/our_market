@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:our_market/core/componant/shimmer_iamge.dart';
-import 'package:our_market/core/function/navigator_push.dart';
 import 'package:our_market/core/widgets/app_colors.dart';
 import 'package:our_market/core/widgets/subtitel_text_widget.dart';
 import 'package:our_market/core/widgets/titel_text_widget.dart';
-import 'package:our_market/featuers/home/data/product_model.dart';
-import 'package:our_market/featuers/product_detalse/presentation/view/product_detalse_view.dart';
 
 class CustomAllProductStore extends StatelessWidget {
   const CustomAllProductStore({
@@ -28,7 +25,7 @@ class CustomAllProductStore extends StatelessWidget {
               Stack(
                 children: [
                   const ClipRRect(
-                    borderRadius: const BorderRadius.only(
+                    borderRadius: BorderRadius.only(
                       topRight: Radius.circular(12),
                       bottomRight: Radius.circular(12),
                       bottomLeft: Radius.circular(12),

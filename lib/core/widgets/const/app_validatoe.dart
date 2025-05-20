@@ -1,6 +1,6 @@
 class AppValidatoe {
   static String? displayNamedValidator(String displayName) {
-    if (displayName == null || displayName.isEmpty) {
+    if (displayName.isEmpty) {
       return "Disolay name contect is Empety";
     }
     if (displayName.length < 3 || displayName.length > 20) {

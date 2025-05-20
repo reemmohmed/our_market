@@ -2,7 +2,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:our_market/core/const/loding_manger.dart';
 import 'package:our_market/core/function/navigator_push.dart';
 import 'package:our_market/core/function/show_mes.dart';
 import 'package:our_market/core/widgets/app_colors.dart';

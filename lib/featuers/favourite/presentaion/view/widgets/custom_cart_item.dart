@@ -1,9 +1,7 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
-import 'package:our_market/core/function/navigator_push.dart';
 import 'package:our_market/core/widgets/titel_text_widget.dart';
 import 'package:our_market/featuers/auth/presentaion/view/widget/custom_elevated_button.dart';
-import 'package:our_market/featuers/product_detalse/presentation/view/product_detalse_view.dart';
 
 class CustomCardItem extends StatelessWidget {
   const CustomCardItem({
@@ -37,8 +35,8 @@ class CustomCardItem extends StatelessWidget {
                 ),
               ),
               const Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: const Row(
+                padding: EdgeInsets.all(4.0),
+                child: Row(
                   children: [
                     TitelTextWidget(text: "TitelProduct"),
                     Spacer(),

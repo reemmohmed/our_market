@@ -8,11 +8,8 @@ import 'package:our_market/core/function/navigator_push.dart';
 import 'package:our_market/core/widgets/app_colors.dart';
 import 'package:our_market/core/widgets/subtitel_text_widget.dart';
 import 'package:our_market/core/widgets/titel_text_widget.dart';
-import 'package:our_market/featuers/auth/presentaion/manger/cubit/authentication_cubit.dart';
 import 'package:our_market/featuers/home/data/product_model.dart';
-import 'package:our_market/featuers/nave_bar/manger/cubit/nave_bar_cubit_cubit.dart';
 import 'package:our_market/featuers/product_detalse/presentation/view/product_detalse_view.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pay_with_paymob/pay_with_paymob.dart';
 
 class AllProduct extends StatefulWidget {

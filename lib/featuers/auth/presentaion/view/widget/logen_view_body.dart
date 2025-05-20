@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:our_market/core/const/loding_manger.dart';
 import 'package:our_market/core/widgets/titel_text_widget.dart';
 import 'package:our_market/featuers/auth/presentaion/view/widget/custom_logen_card.dart';
 

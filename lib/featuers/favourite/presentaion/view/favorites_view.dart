@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:our_market/core/const/app_asset.dart';
 import 'package:our_market/core/widgets/titel_text_widget.dart';
-import 'package:our_market/featuers/favourite/presentaion/view/widgets/custom_app_favourit.dart';
-import 'package:our_market/featuers/favourite/presentaion/view/widgets/favourits_view_body.dart';
 import 'package:our_market/featuers/home/mange/Home_mange/home_cubit.dart';
 import 'package:our_market/featuers/home/presentaion/view/widgets/all_product_list.dart';
 

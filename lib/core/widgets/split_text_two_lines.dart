@@ -20,7 +20,7 @@ class SplitTextTwoLines extends StatelessWidget {
     }
 
     // لو أكتر من 4 كلمات، نأخذ أول 4 ونحط "... "
-    final trimmedText = words.take(3).join(' ') + '...';
+    final trimmedText = '${words.take(3).join(' ')}...';
 
     return Text(
       trimmedText,

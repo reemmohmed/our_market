@@ -24,7 +24,7 @@ class CustomButtonCheet extends StatelessWidget {
                     FittedBox(child: TitelTextWidget(text: "Subotal")),
                     Text(
                       " price",
-                      style: const TextStyle(color: Colors.blue),
+                      style: TextStyle(color: Colors.blue),
                     ),
                   ],
                 ),
@@ -65,12 +65,12 @@ class CustomButtomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Padding(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           // const PaymentListView(),
-          const SizedBox(
+          SizedBox(
             height: 10,
           ),
           // CustomButtom(

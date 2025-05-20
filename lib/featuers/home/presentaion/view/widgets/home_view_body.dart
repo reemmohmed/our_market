@@ -3,7 +3,6 @@ import 'package:our_market/core/const/app_asset.dart';
 import 'package:our_market/core/widgets/text_app_shammer.dart';
 import 'package:our_market/featuers/home/presentaion/view/widgets/all_product_list.dart';
 import 'package:our_market/featuers/home/presentaion/view/widgets/catogery_list.dart';
-import 'package:our_market/featuers/home/presentaion/view/widgets/all_product.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -16,10 +15,10 @@ class HomeViewBody extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15),
-            child: const TextAppShammer(lable: "Catogeres"),
+            child: TextAppShammer(lable: "Catogeres"),
           ),
-          const CatogetyList(),
-          const SizedBox(
+          CatogetyList(),
+          SizedBox(
             height: 7.5,
           ),
           AllProductList(

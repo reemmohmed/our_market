@@ -7,7 +7,6 @@ import 'package:our_market/core/AppServer/api_serves.dart';
 import 'package:our_market/featuers/home/data/favourtes_product.dart';
 import 'package:our_market/featuers/home/data/product_model.dart';
 import 'package:our_market/featuers/home/data/pruches_table.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 part 'home_state.dart';

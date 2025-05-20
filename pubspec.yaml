@@ -38,6 +38,7 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^9.1.0
   flutter_dotenv: ^5.2.1
+  flutter_launcher_icons: ^0.14.3
   flutter_rating_bar: ^4.0.1
   google_nav_bar: ^5.0.7
   google_sign_in: ^6.2.1
@@ -58,6 +59,7 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
 
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -66,8 +68,19 @@ flutter:
   assets:
     - assets/images/
     - .env
+flutter_launcher_icons: 
+    android: true
+    ios: true
+    image_path: "assets/play_store_512.png" 
+    web:
+     generate:  
+            true
+     image_path: "assets/play_store_512.png"
+    background_color: "#ffffff"
+    theme_color: "#000000"
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
+    
   # https://flutter.dev/to/resolution-aware-images
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/to/asset-from-package
